@@ -4,8 +4,8 @@ import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <div>smurf willy</div>
+    <App/>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('reactApp')
 );
 

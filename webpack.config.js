@@ -21,6 +21,7 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Odd',
+      templateContent: "<div id='reactApp'></div>"
     }),
   ],
   module: {

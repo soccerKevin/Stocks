@@ -22,7 +22,7 @@ app.use(
 
 const appPage = path.resolve('src/app.js');
 app.get('/', (req, res) => {
-	res.send('')
+	res.send('index.html')
 });
 
 app.listen(port, function () {
