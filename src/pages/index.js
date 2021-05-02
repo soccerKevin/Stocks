@@ -1,1 +1,2 @@
-export main from './main.js';
+export Home from './home';
+export NotFound from './notFound';

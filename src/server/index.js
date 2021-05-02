@@ -18,9 +18,9 @@ app.use(
   })
 );
 
-const appPage = path.resolve('src/app.js');
-app.get('/', (req, res) => {
-	res.send('index.html')
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve('public/index.html'));
+	// res.send('index.html')
 });
 
 app.listen(port, function () {

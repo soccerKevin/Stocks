@@ -7,6 +7,23 @@ const config = {
     contentBase: './public',
   },
   mode: 'development',
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env', 
+              '@babel/preset-react', 
+            ]
+          }
+        }
+      }
+    ]
+  },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'public'),
@@ -24,20 +41,11 @@ const config = {
       templateContent: "<div id='reactApp'></div>"
     }),
   ],
-  module: {
-    rules: [
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
-      }
-    ]
-  }
+  resolve: {
+    alias: {
+      components: path.resolve(__dirname, './src/components'),
+    },
+  },
 };
 
 module.exports = config;

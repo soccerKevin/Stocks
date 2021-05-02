@@ -1,5 +1,14 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-const App = () => <div>smurf</div>
+import Menu from './menu';
+import Switch from './switch';
+
+const App = () => (
+  <Router>
+    <Menu />
+    <Switch />
+  </Router>
+);
 
 export default App;
