@@ -10,8 +10,6 @@ const compiler = webpack(webpackConfig);
 
 const port = 3000;
 
-console.log()
-
 // Tell express to use the webpack-dev-middleware and use the webpack.config.js
 // configuration file as a base.
 app.use(
