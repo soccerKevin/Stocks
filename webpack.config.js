@@ -20,7 +20,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Odd',
+      title: 'Stocks',
       templateContent: "<div id='reactApp'></div>"
     }),
   ],
