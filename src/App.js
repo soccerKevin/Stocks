@@ -9,7 +9,9 @@ import styles from './app.less';
 const App = () => (
   <Router>
     <Menu />
-    <Switch />
+    <div id="mainContainer">
+      <Switch />
+    </div>
   </Router>
 );
 
