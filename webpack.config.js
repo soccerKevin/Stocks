@@ -21,7 +21,26 @@ const config = {
             ]
           }
         }
-      }
+      },
+      {
+        test: /\.less$/i,
+        use: [
+          {
+            loader: "style-loader",
+          },
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: "less-loader",
+            options: {
+              lessOptions: {
+                paths: [path.resolve(__dirname, "src/")],
+              },
+            },
+          },
+        ],
+      },
     ]
   },
   output: {
