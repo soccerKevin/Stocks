@@ -1,21 +1,34 @@
+@import 'importable';
+
 #menu {
   ul {
     display: flex;
 
     li {
       list-style-type: none;
-      padding: 1rem;
-      font-size: 2rem;
       display: flex;
       justify-content: center;
       text-align: center;
-      background: blue;
-      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+
 
       a {
+        .noselect;
         font-family: 'Permanent Marker', cursive;
         color: white;
         text-decoration: none;
+        padding: 1rem;
+        font-size: 2rem;
+        background: blue;
+        border: white solid 1px;
+        border-radius: 8px 8px 0 0;
+
+
+        &:hover, &.active {
+          background: green;
+        }
       }
     }
   }

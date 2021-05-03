@@ -1,17 +1,36 @@
 import React from 'react';
+import classnames from 'classnames';
 
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import styles from './styles/menu.less';
 
-const Menu = () => (
-  <nav id="menu">
-    <ul>
-      <li>
-        <Link to='/'>Home</Link>
-      </li>
-    </ul>
-  </nav>
-);
+const paths = [
+  {
+    label: 'My Charts',
+    to: '/myCharts',
+  },
+];
+
+const Menu = () => {
+  const location = useLocation();
+  return (
+    <nav id="menu">
+      <ul>
+        {
+          paths.map((path, i) => {
+            const { to, label } = path;
+
+            return (
+              <li key={`${i}_${path}`}>
+                <NavLink activeClassName="active" to={to}>{label}</NavLink>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+  );
+};
 
 export default Menu;

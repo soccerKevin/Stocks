@@ -23,6 +23,14 @@ const config = {
         }
       },
       {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
+      {
         test: /\.less$/i,
         use: [
           {
@@ -63,6 +71,7 @@ const config = {
   resolve: {
     alias: {
       components: path.resolve(__dirname, './src/components'),
+      images: path.resolve(__dirname, './src/images'),
     },
   },
 };

@@ -12,10 +12,10 @@ const Switch = () => {
     <ReactSwitch>
       {
         routes.map((route, i) => {
-          const { Page, options } = route;
+          const { Page, routeOptions, pageOptions } = route;
           return (
-            <Route key={`${i}${options.path}`} {...options}>
-              <Page location={location} />
+            <Route key={`${i}${routeOptions.path}`} {...routeOptions}>
+              <Page location={location} {...pageOptions} />
             </Route>
           );
         })
