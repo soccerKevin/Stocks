@@ -1,11 +1,11 @@
-import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter as Router, Link } from 'react-router-dom'
 
-import Menu from './menu';
-import Switch from './switch';
+import Menu from './menu'
+import Switch from './switch'
 
-import styles from './styles/app.less';
-import logo from 'images/logo.jpg';
+import styles from './styles/app.less'
+import logo from 'images/logo.jpg'
 
 const App = () => (
   <Router>
@@ -19,6 +19,6 @@ const App = () => (
       <Switch />
     </div>
   </Router>
-);
+)
 
-export default App;
+export default App

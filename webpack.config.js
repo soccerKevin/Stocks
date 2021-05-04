@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const config = {
   devtool: 'inline-source-map',
@@ -67,6 +68,7 @@ const config = {
       title: 'Stocks',
       templateContent: "<div id='reactApp'></div>"
     }),
+    new ESLintPlugin(),
   ],
   resolve: {
     alias: {

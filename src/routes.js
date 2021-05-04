@@ -1,4 +1,4 @@
-import * as pages from './pages';
+import * as pages from './pages'
 
 const routes = [
   {
@@ -18,6 +18,6 @@ const routes = [
 
     },
   },
-];
+]
 
-export default routes;
+export default routes

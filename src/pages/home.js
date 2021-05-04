@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-const Home = () => (
+export const Home = () => (
   <h1>Freedom Units!</h1>
-);
+)
 
-export default Home;
+export default Home

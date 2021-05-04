@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const Charts = () => (
+export const Charts = () => (
   <div id='charts'>
     
   </div>
-);
+)
 
-export default Charts;
+export default Charts
