@@ -20,7 +20,6 @@ app.use(
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve('public/index.html'))
-  // res.send('index.html')
 })
 
 app.listen(port, function () {
