@@ -72,10 +72,10 @@ const config = {
   ],
   resolve: {
     alias: {
+      app: path.resolve(__dirname, './src/app'),
       components: path.resolve(__dirname, './src/app/components'),
       images: path.resolve(__dirname, './src/app/images'),
       pages: path.resolve(__dirname, './src/app/pages'),
-      app: path.resolve(__dirname, './src/app'),
     },
   },
 };

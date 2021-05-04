@@ -4,14 +4,13 @@ const path = require('path')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 
 const app = express()
-const configPath = path.resolve('webpack.config.js')
-const webpackConfig = require(configPath)
+const webpackConfig = require(path.resolve('webpack.config.js'))
 const compiler = webpack(webpackConfig)
 
-const port = 3000
+const config = require(path.resolve('config/index.js'));
 
-// Tell express to use the webpack-dev-middleware and use the webpack.config.js
-// configuration file as a base.
+const { server: { port } } = config;
+
 app.use(
   webpackDevMiddleware(compiler, {
     publicPath: webpackConfig.output.publicPath,
@@ -21,6 +20,7 @@ app.use(
 app.get('*', (req, res) => {
   res.sendFile(path.resolve('public/index.html'))
 })
+
 
 app.listen(port, function () {
   console.log(`Listening on port ${port}!`)
