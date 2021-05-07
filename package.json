@@ -8,7 +8,8 @@
     "dev": "node src/server/index.js",
     "watch": "webpack --watch",
     "start": "webpack serve --open",
-    "build": "webpack"
+    "build": "webpack",
+    "alpha": "node src/api/alpha/index.js"
   },
   "author": "",
   "license": "UNLICENSED",
