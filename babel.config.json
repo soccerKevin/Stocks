@@ -6,5 +6,12 @@
   "plugins": [
     "@babel/plugin-syntax-jsx",
     "@babel/plugin-proposal-export-default-from",
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true,
+        "corejs": 3
+      }
+    ],
   ]
 }

@@ -7,6 +7,8 @@ const app = express()
 const webpackConfig = require(path.resolve('webpack.config.js'))
 const compiler = webpack(webpackConfig)
 
+const apiRouter = require('./api/router.js')
+
 const config = require(path.resolve('config/index.js'));
 
 const { server: { port } } = config;
@@ -16,6 +18,8 @@ app.use(
     publicPath: webpackConfig.output.publicPath,
   })
 )
+
+app.use('/api/', apiRouter)
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve('public/index.html'))
