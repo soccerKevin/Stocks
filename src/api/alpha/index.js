@@ -1,35 +1,30 @@
 const axios = require('axios')
-const path = require('path');
+const path = require('path')
 
-const { alpha: { apiKey } } = require(path.resolve('config/index.js'))
+const { alpha: { apikey } } = require(path.resolve('config/index.js'))
 
-const TIME_SERIES_INTRADAY = 'TIME_SERIES_INTRADAY'
 const baseURL = 'https://www.alphavantage.co'
+const route = '/query'
 
-const reqOptions = ({ func, symbol, interval, apikey }) => ({
+const getOptions = ({ endpoint, symbol, interval }) => ({
   baseURL,
   method: 'get',
   params: {
-    function: func,
+    function: endpoint,
     symbol,
     interval,
     apikey,
   }
 })
 
-const options = reqOptions({
-  func: TIME_SERIES_INTRADAY,
-  symbol: 'GROW',
-  interval: '5min',
-  apikey: apiKey,
-})
+const getStock = ({ endpoint, symbol, interval }) => {
+  const options = getOptions({ endpoint, symbol, interval })
+  
+  return axios.get(route, options)
+  .then((response) => response.data)
+  .catch((error) => {
+    console.log(error)
+  })
+}
 
-const route = '/query'
-
-axios.get(route, options)
-.then(response => {
-  console.log(response.data)
-})
-.catch(error => {
-  console.log(error)
-});
+module.exports = { getStock }

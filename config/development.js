@@ -5,7 +5,7 @@ const config = {
     "port": 3000,
   },
   "alpha": {
-    apiKey: process.env.ALPHA_API_KEY,
+    apikey: process.env.ALPHA_API_KEY,
   }
 }
 

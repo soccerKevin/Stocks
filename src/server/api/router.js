@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
 
-const getStock = require('./getStock.js')
+const getStock = require('./getStock')
 
 router.get('/stock/:symbol', getStock)
 
