@@ -1,10 +1,12 @@
 const axios = require('axios')
 const path = require('path')
+const { zipObject, values, entries } = require('lodash')
 
 const { alpha: { apikey } } = require(path.resolve('config/index.js'))
 
 const baseURL = 'https://www.alphavantage.co'
 const route = '/query'
+const DATA_POINT_KEYS = ['open', 'high', 'low', 'close', 'volume']
 
 const getOptions = ({ endpoint, symbol, interval }) => ({
   baseURL,
@@ -17,11 +19,26 @@ const getOptions = ({ endpoint, symbol, interval }) => ({
   }
 })
 
+const normalize = (data) => {
+  const [ metaData, intervals ] = values(data)
+
+  const normalizedData = entries(intervals).map((args) => {
+    const [ timeStamp, pointsData ] = args;
+
+    const output = zipObject(DATA_POINT_KEYS, values(pointsData))
+    output.timeStamp = timeStamp
+
+    return output
+  })
+  
+  return normalizedData
+}
+
 const getStock = ({ endpoint, symbol, interval }) => {
   const options = getOptions({ endpoint, symbol, interval })
   
   return axios.get(route, options)
-  .then((response) => response.data)
+  .then((response) => normalize(response.data))
   .catch((error) => {
     console.log(error)
   })
