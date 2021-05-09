@@ -10,8 +10,7 @@ import {
 } from 'recharts'
 
 const getData = async () => {
-  console.log('getting data')
-  return fetch('/api/stock/GE')
+  return fetch('/api/stock/GROW')
   .then((res) => res.json())
   .then((data) => {
     console.log('data: ', data)
@@ -29,22 +28,6 @@ const Chart = () => {
       data={query.data}
       margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
       <defs>
-        <linearGradient id='colorOpen' x1='0' y1='0' x2='0' y2='1'>
-          <stop offset='5%' stopColor='#8884d8' stopOpacity={0.8}/>
-          <stop offset='95%' stopColor='#8884d8' stopOpacity={0}/>
-        </linearGradient>
-        <linearGradient id='colorClose' x1='0' y1='0' x2='0' y2='1'>
-          <stop offset='5%' stopColor='#82ca9d' stopOpacity={0.8}/>
-          <stop offset='95%' stopColor='#82ca9d' stopOpacity={0}/>
-        </linearGradient>
-        <linearGradient id='colorHigh' x1='0' y1='0' x2='0' y2='1'>
-          <stop offset='5%' stopColor='#024f05' stopOpacity={0.8}/>
-          <stop offset='95%' stopColor='#02ed0a' stopOpacity={0}/>
-        </linearGradient>
-        <linearGradient id='colorClose' x1='0' y1='0' x2='0' y2='1'>
-          <stop offset='5%' stopColor='#82ca9d' stopOpacity={0.8}/>
-          <stop offset='95%' stopColor='#82ca9d' stopOpacity={0}/>
-        </linearGradient>
         <linearGradient id='colorVolume' x1='0' y1='0' x2='0' y2='1'>
           <stop offset='5%' stopColor='#82ca9d' stopOpacity={0.8}/>
           <stop offset='95%' stopColor='#82ca9d' stopOpacity={0}/>
@@ -54,10 +37,6 @@ const Chart = () => {
       <YAxis />
       <CartesianGrid strokeDasharray='3 3' />
       <Tooltip />
-      <Area type='monotone' dataKey='open' stroke='#8884d8' fillOpacity={1} fill='url(#colorOpen)' />
-      <Area type='monotone' dataKey='close' stroke='#82ca9d' fillOpacity={1} fill='url(#colorClose)' />
-      <Area type='monotone' dataKey='high' stroke='#82ca9d' fillOpacity={1} fill='url(#colorHigh)' />
-      <Area type='monotone' dataKey='low' stroke='#82ca9d' fillOpacity={1} fill='url(#colorLow)' />
       <Area type='monotone' dataKey='volume' stroke='#82ca9d' fillOpacity={1} fill='url(#colorVolume)' />
     </AreaChart>
   )

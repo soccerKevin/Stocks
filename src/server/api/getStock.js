@@ -1,5 +1,4 @@
 const path = require('path')
-// const data = require('./fakeData')
 
 const { getStock: getAlphaStock } = require(path.resolve('src/api/alpha/index.js'))
 const { TIME_SERIES_INTRADAY } = require(path.resolve('src/api/alpha/endpoints.js'))
