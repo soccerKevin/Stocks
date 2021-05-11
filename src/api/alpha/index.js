@@ -8,13 +8,14 @@ const baseURL = 'https://www.alphavantage.co'
 const route = '/query'
 const DATA_POINT_KEYS = ['open', 'high', 'low', 'close', 'volume']
 
-const getOptions = ({ endpoint, symbol, interval }) => ({
+const getOptions = ({ endpoint, symbol, interval, outputsize }) => ({
   baseURL,
   method: 'get',
   params: {
     function: endpoint,
     symbol,
     interval,
+    outputsize: outputsize || 68,
     apikey,
   }
 })
@@ -30,8 +31,10 @@ const normalize = (data) => {
 
     return output
   })
+
+  const sorted = normalizedData.sort((a, b) => new Date(a.timeStamp) - new Date(b.timeStamp))
   
-  return normalizedData
+  return sorted
 }
 
 const getStock = ({ endpoint, symbol, interval }) => {

@@ -1,44 +1,43 @@
 import React from 'react'
 import { useQuery } from 'react-query'
+import moment from 'moment'
 import { 
-  Area,
-  AreaChart,
+  Line,
+  LineChart,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
 } from 'recharts'
 
+const normalize = (data) => data.map((point) => {
+  point.xName = moment(point.timeStamp).format('DD-HH:mm')
+  return point
+})
+
 const getData = async () => {
   return fetch('/api/stock/GROW')
   .then((res) => res.json())
-  .then((data) => {
-    console.log('data: ', data)
-    return data
-  })
+  .then((data) => normalize(data))
 }
 
 const Chart = () => {
   const query = useQuery('data', getData)
+  console.log('data: ', query.data)
 
   return (
-    <AreaChart 
+    <LineChart 
       width={730} 
       height={250} 
       data={query.data}
       margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-      <defs>
-        <linearGradient id='colorVolume' x1='0' y1='0' x2='0' y2='1'>
-          <stop offset='5%' stopColor='#82ca9d' stopOpacity={0.8}/>
-          <stop offset='95%' stopColor='#82ca9d' stopOpacity={0}/>
-        </linearGradient>
-      </defs>
-      <XAxis dataKey='timeStamp' />
-      <YAxis />
+      <XAxis dataKey='xName' />
+      <YAxis domain={['dataMin', 'dataMax']} />
       <CartesianGrid strokeDasharray='3 3' />
       <Tooltip />
-      <Area type='monotone' dataKey='volume' stroke='#82ca9d' fillOpacity={1} fill='url(#colorVolume)' />
-    </AreaChart>
+      <Line type='monotone' dataKey='close' stroke='#82ca9d' dot={false} />
+      <Line type='monotone' dataKey='open' stroke='#ff0000' dot={false} />
+    </LineChart>
   )
 }
 

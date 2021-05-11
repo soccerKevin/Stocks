@@ -24,11 +24,7 @@
         "react"
     ],
     "rules": {
-        "indent": [
-            "error",
-            2,
-            { "MemberExpression": 0 }
-        ],
+        "indent": ["error", 2, { "MemberExpression": 0 }],
         "linebreak-style": [
             "error",
             "unix"
@@ -41,7 +37,7 @@
             "error",
             "never"
         ],
-        "no-unused-vars": ["error", { "varsIgnorePattern": "styles" }],
+        "no-unused-vars": ["warn", { "varsIgnorePattern": "styles" }],
         "no-restricted-exports": ["error", { "restrictedNamedExports": [] }],
         "react/prop-types": 0
     }
