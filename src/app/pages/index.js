@@ -1,3 +1,3 @@
-export { Charts } from './charts'
-export { Home } from './home'
-export { NotFound } from './notFound'
+export { default as Charts } from './charts'
+export { default as Home } from './home'
+export { default as NotFound } from './notFound'

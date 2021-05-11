@@ -2,7 +2,7 @@ import React from 'react'
 
 import styles from './styles/notFound.less'
 
-export const NotFound = ({ location: { pathname } }) => (
+const NotFound = ({ location: { pathname } }) => (
 
   <div id='notFound'>
     <h1>404</h1>
