@@ -1,3 +1,4 @@
+var debug = require('debug')('stocks')
 const express = require('express')
 const webpack = require('webpack')
 const path = require('path')
@@ -27,5 +28,5 @@ app.get('*', (req, res) => {
 
 
 app.listen(port, function () {
-  console.log(`Listening on port ${port}!`)
+  debug(`Listening on port ${port}!`)
 })
