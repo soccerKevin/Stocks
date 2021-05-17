@@ -38,7 +38,7 @@
             "error",
             "never"
         ],
-        "no-unused-vars": ["warn", { "varsIgnorePattern": "styles" }],
+        "no-unused-vars": ["warn", { "varsIgnorePattern": "styles", "argsIgnorePattern": "^_" }],
         "no-restricted-exports": ["error", { "restrictedNamedExports": [] }],
         "react/prop-types": 0
     }
