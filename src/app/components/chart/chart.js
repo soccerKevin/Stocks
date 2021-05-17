@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { useQuery } from 'react-query'
 import moment from 'moment'
 import LineChart from './lineChart'
@@ -9,8 +10,7 @@ import {
   TextField,
 } from '@material-ui/core'
 
-import companies from 'conf/companies'
-const { COMPANIES, COMPANY_HASH } = companies
+import { SYMBOLS, COMPANY_HASH } from 'conf/companies'
 
 import './style/chart.less'
 
@@ -19,15 +19,9 @@ const normalize = (data) => data.map((point) => {
   return point
 })
 
-const getData = async () => {
-  return fetch('/api/stock/GROW')
-  .then((res) => res.json())
-  .then((data) => normalize(data))
-}
-
-const AutocompleteOption = (props, option, { selected }) => (
+const AutocompleteOption = (props, option) => (
   <li {...props}>
-    <span>{option.symbol}</span>
+    <span>{option}</span>
   </li>
 )
 
@@ -40,20 +34,31 @@ const AutocompleteInput = (params) => (
   />
 )
 
-const Chart = () => {
-  const query = useQuery('data', getData)
+const getData = async ({ queryKey: [_key, { symbol }] }) => (
+  fetch(`/api/stock/${symbol}`)
+  .then((res) => res.json())
+  .then((data) => normalize(data))
+)
+
+const Chart = ({ symbol: symb }) => {
+  const [symbol, setSymbol] = useState(symb)
+  const query = useQuery([symbol, { symbol }], getData)
 
   return (
-    <Box className='stockChart'>
+    <Box className='chart'>
       <Container className='header'>
+        <h2 className='companyName'>{COMPANY_HASH[symbol]}</h2>
         <Autocomplete 
-          options={COMPANIES} 
+          options={SYMBOLS}
           renderOption={AutocompleteOption}
-          getOptionLabel={(option) => option.symbol}
+          getOptionLabel={(option) => option}
           renderInput={AutocompleteInput}
           autoHighlight
+          autoComplete
+          disableClearable
           className='companySelect'
-          inputValue='GROW'
+          onChange={(e, value) => setSymbol(value)}
+          defaultValue={symb}
         />
       </Container>
       <Container>
@@ -65,6 +70,14 @@ const Chart = () => {
       </Container>
     </Box>
   )
+}
+
+Chart.propTypes = {
+  symbol: PropTypes.string,
+}
+
+Chart.defaultProps = {
+  symbol: 'GROW',
 }
 
 export default Chart
