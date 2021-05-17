@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-const COMPANIES = [{
+export const COMPANIES = [{
   symbol: "A",
   name: "Agilent Technologies",
 },
@@ -574,7 +574,7 @@ const COMPANIES = [{
 },
 {
   symbol: "AEM",
-  name: "Agnico Eagle Mines",
+  name: " ico Eagle Mines",
 },
 {
   symbol: "AEMD",
@@ -747,10 +747,6 @@ const COMPANIES = [{
 {
   symbol: "AGM",
   name: "Federal Agricultural Mortgage",
-},
-{
-  symbol: "AGM",
-  name: "- Federal Agricultural Mortgage",
 },
 {
   symbol: "AGMH",
@@ -931,14 +927,6 @@ const COMPANIES = [{
 {
   symbol: "AKIC",
   name: "Sports Ventures Acquisition",
-},
-{
-  symbol: "AKO",
-  name: "- Embotelladora Andina",
-},
-{
-  symbol: "AKO",
-  name: "- Embotelladora Andina",
 },
 {
   symbol: "AKOM",
@@ -2982,11 +2970,7 @@ const COMPANIES = [{
 },
 {
   symbol: "BF",
-  name: "- Brown-Forman",
-},
-{
-  symbol: "BF",
-  name: "- Brown-Forman",
+  name: "Brown-Forman",
 },
 {
   symbol: "BFAM",
@@ -3059,10 +3043,6 @@ const COMPANIES = [{
 {
   symbol: "BH",
   name: "Biglari Holdings",
-},
-{
-  symbol: "BH",
-  name: "- Biglari Holdings",
 },
 {
   symbol: "BHAT",
@@ -3606,11 +3586,7 @@ const COMPANIES = [{
 },
 {
   symbol: "BRK",
-  name: "- Berkshire Hathaway",
-},
-{
-  symbol: "BRK",
-  name: "- Berkshire Hathaway",
+  name: "Berkshire Hathaway",
 },
 {
   symbol: "BRKL",
@@ -3890,7 +3866,7 @@ const COMPANIES = [{
 },
 {
   symbol: "BWL",
-  name: "- Bowl America",
+  name: "Bowl America",
 },
 {
   symbol: "BWMN",
@@ -5794,11 +5770,7 @@ const COMPANIES = [{
 },
 {
   symbol: "CRD",
-  name: "- Crawford & Company",
-},
-{
-  symbol: "CRD",
-  name: "- Crawford & Company",
+  name: "Crawford & Company",
 },
 {
   symbol: "CRDF",
@@ -6355,10 +6327,6 @@ const COMPANIES = [{
 {
   symbol: "CWEN",
   name: "Clearway Energy",
-},
-{
-  symbol: "CWEN",
-  name: "- Clearway Energy",
 },
 {
   symbol: "CWGL",
@@ -9669,10 +9637,6 @@ const COMPANIES = [{
   name: "Greif",
 },
 {
-  symbol: "GEF",
-  name: "- Greif",
-},
-{
   symbol: "GEG",
   name: "Great Elm Group",
 },
@@ -10533,10 +10497,6 @@ const COMPANIES = [{
   name: "Gray Television",
 },
 {
-  symbol: "GTN",
-  name: "- Gray Television",
-},
-{
   symbol: "GTOO",
   name: "Graf Acquisition II",
 },
@@ -10863,10 +10823,6 @@ const COMPANIES = [{
 {
   symbol: "HEI",
   name: "HEICO Corporation",
-},
-{
-  symbol: "HEI",
-  name: "- HEICO Corporation",
 },
 {
   symbol: "HELE",
@@ -12846,11 +12802,7 @@ const COMPANIES = [{
 },
 {
   symbol: "JW",
-  name: "- John Wiley & Sons",
-},
-{
-  symbol: "JW",
-  name: "- John Wiley & Sons",
+  name: "John Wiley & Sons",
 },
 {
   symbol: "JWEL",
@@ -13693,10 +13645,6 @@ const COMPANIES = [{
   name: "Lennar",
 },
 {
-  symbol: "LEN",
-  name: "- Lennar",
-},
-{
   symbol: "LESL",
   name: "Leslie's",
 },
@@ -13754,11 +13702,7 @@ const COMPANIES = [{
 },
 {
   symbol: "LGF",
-  name: "- Lions Gate Entertainment",
-},
-{
-  symbol: "LGF",
-  name: "- Lions Gate Entertainment",
+  name: "Lions Gate Entertainment",
 },
 {
   symbol: "LGHL",
@@ -15045,10 +14989,6 @@ const COMPANIES = [{
   name: "McCormick",
 },
 {
-  symbol: "MKC",
-  name: "- McCormick",
-},
-{
   symbol: "MKD",
   name: "Molecular Data",
 },
@@ -15258,11 +15198,7 @@ const COMPANIES = [{
 },
 {
   symbol: "MOG",
-  name: "- Moog Inc.",
-},
-{
-  symbol: "MOG",
-  name: "- Moog Inc.",
+  name: "Moog Inc.",
 },
 {
   symbol: "MOGO",
@@ -17785,10 +17721,6 @@ const COMPANIES = [{
   name: "Petroleo Brasileiro",
 },
 {
-  symbol: "PBR",
-  name: "- Petroleo Brasileiro",
-},
-{
   symbol: "PBRM",
   name: "Parabellum Acquisition",
 },
@@ -19466,11 +19398,7 @@ const COMPANIES = [{
 },
 {
   symbol: "RDS",
-  name: "- Royal Dutch Shell",
-},
-{
-  symbol: "RDS",
-  name: "- Royal Dutch Shell",
+  name: "Royal Dutch Shell",
 },
 {
   symbol: "RDUS",
@@ -26021,15 +25949,11 @@ const COMPANIES = [{
   name: "Zynex",
 }]
 
-const SYMBOLS_OBJ = {}
+export const SYMBOLS_OBJ = {}
 
-const SYMBOLS = COMPANIES.map((company) => {
+export const SYMBOLS = COMPANIES.map((company) => {
   SYMBOLS_OBJ[company.symbol] = company.symbol
   return company.symbol
 })
 
-const COMPANY_HASH = COMPANIES.reduce((acc, company) => acc[company.symbol] = company.name)
-
-const exports = { COMPANIES, COMPANY_HASH, SYMBOLS_OBJ, SYMBOLS }
-
-export default exports
+export const COMPANY_HASH = COMPANIES.reduce((acc, company) => ({ ...acc, [company.symbol]: company.name }), {})
