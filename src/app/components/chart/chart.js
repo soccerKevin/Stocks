@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import { useQuery } from 'react-query'
 import moment from 'moment'
 import LineChart from './lineChart'
-import { 
+import {
   Autocomplete,
   Box,
   Container,
   TextField,
 } from '@material-ui/core'
 
-import { SYMBOLS, COMPANY_HASH } from 'conf/companies'
+import { SYMBOLS, COMPANIES, COMPANY_HASH } from 'conf/companies'
 
 import './style/chart.less'
 
@@ -48,8 +48,8 @@ const Chart = ({ symbol: symb }) => {
     <Box className='chart'>
       <Container className='header'>
         <h2 className='companyName'>{COMPANY_HASH[symbol]}</h2>
-        <Autocomplete 
-          options={SYMBOLS}
+        <Autocomplete
+          options={COMPANIES}
           renderOption={AutocompleteOption}
           getOptionLabel={(option) => option}
           renderInput={AutocompleteInput}
@@ -62,9 +62,9 @@ const Chart = ({ symbol: symb }) => {
         />
       </Container>
       <Container>
-        <LineChart 
-          data={query.data} 
-          width={730} 
+        <LineChart
+          data={query.data}
+          width={730}
           height={250}
         />
       </Container>

@@ -35,7 +35,7 @@
             { "avoidEscape": true }
         ],
         "semi": [
-            "error",
+            "warn",
             "never"
         ],
         "no-unused-vars": ["warn", { "varsIgnorePattern": "styles", "argsIgnorePattern": "^_" }],

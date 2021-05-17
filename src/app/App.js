@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from "react-helmet"
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import StyledEngineProvider from '@material-ui/core/StyledEngineProvider'
@@ -15,6 +16,10 @@ const App = () => (
   <Router>
     <QueryClientProvider client={queryClient}>
       <StyledEngineProvider injectFirst>
+        <Helmet>
+          <meta charSet='utf-8' />
+          <title>Stocks</title>
+        </Helmet>
         <div id='header'>
           <Link to='/'>
             <img src={logo} id='logo' />
