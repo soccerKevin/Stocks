@@ -75,6 +75,7 @@ const config = {
       api: path.resolve(__dirname, './src/api'),
       app: path.resolve(__dirname, './src/app'),
       components: path.resolve(__dirname, './src/app/components'),
+      conf: path.resolve(__dirname, './src/conf'),
       images: path.resolve(__dirname, './src/app/images'),
       pages: path.resolve(__dirname, './src/app/pages'),
     },

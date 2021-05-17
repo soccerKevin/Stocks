@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const COMPANIES = [{
   symbol: "A",
   name: "Agilent Technologies",
@@ -26019,8 +26021,15 @@ const COMPANIES = [{
   name: "Zynex",
 }]
 
-const SYMBOLS = {}
+const SYMBOLS_OBJ = {}
 
-COMPANIES.map((company) => SYMBOLS[company.symbol] = company.symbol)
+const SYMBOLS = COMPANIES.map((company) => {
+  SYMBOLS_OBJ[company.symbol] = company.symbol
+  return company.symbol
+})
 
-module.exports = { COMPANIES, SYMBOLS }
+const COMPANY_HASH = COMPANIES.reduce((acc, company) => acc[company.symbol] = company.name)
+
+const exports = { COMPANIES, COMPANY_HASH, SYMBOLS_OBJ, SYMBOLS }
+
+export default exports

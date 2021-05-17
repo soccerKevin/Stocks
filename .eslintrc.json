@@ -30,8 +30,9 @@
             "unix"
         ],
         "quotes": [
-            "error",
-            "single"
+            "warn",
+            "single",
+            { "avoidEscape": true }
         ],
         "semi": [
             "error",

@@ -8,10 +8,10 @@ import {
   Tooltip,
 } from 'recharts'
 
-const LineChart = ({ data }) => (
+const LineChart = ({ data, width, height }) => (
   <ReLineChart 
-    width={730} 
-    height={250} 
+    width={width} 
+    height={height}
     data={data}
     margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
     <XAxis dataKey='xName' />

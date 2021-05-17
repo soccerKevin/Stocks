@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import StyledEngineProvider from '@material-ui/core/StyledEngineProvider'
 
 import Menu from './menu'
 import Switch from './switch'
@@ -13,15 +14,17 @@ const queryClient = new QueryClient()
 const App = () => (
   <Router>
     <QueryClientProvider client={queryClient}>
-      <div id='header'>
-        <Link to='/'>
-          <img src={logo} id='logo' />
-        </Link>
-        <Menu />
-      </div>
-      <div id="mainContainer">
-        <Switch />
-      </div>
+      <StyledEngineProvider injectFirst>
+        <div id='header'>
+          <Link to='/'>
+            <img src={logo} id='logo' />
+          </Link>
+          <Menu />
+        </div>
+        <div id="mainContainer">
+          <Switch />
+        </div>
+      </StyledEngineProvider>
     </QueryClientProvider>
   </Router>
 )
