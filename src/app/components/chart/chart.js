@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@material-ui/core'
 
-import { SYMBOLS, COMPANIES, COMPANY_HASH } from 'conf/companies'
+import { COMPANIES, COMPANY_HASH } from 'conf/companies'
 
 import './style/chart.less'
 

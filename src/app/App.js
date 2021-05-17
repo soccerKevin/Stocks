@@ -1,5 +1,5 @@
 import React from 'react'
-import { Helmet } from "react-helmet"
+import { Helmet } from 'react-helmet'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import StyledEngineProvider from '@material-ui/core/StyledEngineProvider'
@@ -26,7 +26,7 @@ const App = () => (
           </Link>
           <Menu />
         </div>
-        <div id="mainContainer">
+        <div id='mainContainer'>
           <Switch />
         </div>
       </StyledEngineProvider>
