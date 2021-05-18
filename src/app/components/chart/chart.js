@@ -60,7 +60,7 @@ Chart.propTypes = {
 
 Chart.defaultProps = {
   symbol: 'GROW',
-  interval: '1min',
+  interval: '5min',
 }
 
 export default Chart
