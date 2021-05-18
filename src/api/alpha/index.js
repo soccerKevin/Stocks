@@ -33,18 +33,22 @@ const normalize = (data) => {
   })
 
   const sorted = normalizedData.sort((a, b) => new Date(a.timeStamp) - new Date(b.timeStamp))
-  
+
   return sorted
 }
 
-const getStock = ({ endpoint, symbol, interval }) => {
-  const options = getOptions({ endpoint, symbol, interval })
-  
-  return axios.get(route, options)
+/*
+  options
+  endpoint: required
+  symbol: required
+  interval: required
+*/
+const getStock = (options) => (
+  axios.get(route, getOptions(options))
   .then((response) => normalize(response.data))
   .catch((error) => {
     console.log(error)
   })
-}
+)
 
 module.exports = { getStock }
