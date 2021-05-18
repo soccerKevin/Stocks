@@ -6,7 +6,6 @@ import LineChart from './lineChart'
 import {
   Autocomplete,
   Box,
-  Container,
   TextField,
 } from '@material-ui/core'
 
@@ -19,9 +18,9 @@ const normalize = (data) => data.map((point) => {
   return point
 })
 
-const AutocompleteOption = (props, option) => (
+const AutocompleteOption = (props, { symbol, name }) => (
   <li {...props}>
-    <span>{option}</span>
+    <span>{symbol}</span><span className='labelName'>&nbsp;({name})</span>
   </li>
 )
 
@@ -33,6 +32,18 @@ const AutocompleteInput = (params) => (
     inputProps={{...params.inputProps}}
   />
 )
+
+const getOptionSelected = ({ symbol, name }, value) => {
+  const regex = new RegExp(value, 'i')
+  return symbol.match(regex) || name.match(regex)
+}
+
+const getOptionLabel = (option) => option.symbol || option
+
+const filterOptions = (options, { inputValue }) => {
+  const r = new RegExp(`^${inputValue}`, 'i')
+  return options.filter(({ symbol, name }) => symbol.match(r) || name.match(r))
+}
 
 const getData = async ({ queryKey: [_key, { symbol }] }) => (
   fetch(`/api/stock/${symbol}`)
@@ -46,28 +57,30 @@ const Chart = ({ symbol: symb }) => {
 
   return (
     <Box className='chart'>
-      <Container className='header'>
+      <Box className='header'>
         <h2 className='companyName'>{COMPANY_HASH[symbol]}</h2>
         <Autocomplete
           options={COMPANIES}
           renderOption={AutocompleteOption}
-          getOptionLabel={(option) => option}
           renderInput={AutocompleteInput}
+          filterOptions={filterOptions}
+          getOptionSelected={getOptionSelected}
+          getOptionLabel={getOptionLabel}
           autoHighlight
           autoComplete
           disableClearable
           className='companySelect'
-          onChange={(e, value) => setSymbol(value)}
+          onChange={(e, value) => setSymbol(value.symbol)}
           defaultValue={symb}
         />
-      </Container>
-      <Container>
+      </Box>
+      <Box>
         <LineChart
           data={query.data}
           width={730}
           height={250}
         />
-      </Container>
+      </Box>
     </Box>
   )
 }
