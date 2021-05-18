@@ -1,3 +1,4 @@
+var debug = require('debug')('stocks:api:alpha')
 const axios = require('axios')
 const path = require('path')
 const { zipObject, values, entries } = require('lodash')
@@ -43,12 +44,14 @@ const normalize = (data) => {
   symbol: required
   interval: required
 */
-const getStock = (options) => (
-  axios.get(route, getOptions(options))
+const getStock = (options) => {
+  const routeOptions = getOptions(options)
+  debug('Fetching: ', routeOptions)
+  return axios.get(route, routeOptions)
   .then((response) => normalize(response.data))
   .catch((error) => {
     console.log(error)
   })
-)
+}
 
 module.exports = { getStock }
