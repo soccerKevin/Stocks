@@ -1,14 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  Autocomplete,
-  TextField,
-} from '@material-ui/core'
+import { Autocomplete, TextField } from '@material-ui/core'
 
 import { COMPANIES } from 'conf/companies'
 
-import './style/companyInput.less'
+import './style/companySelect.less'
 
 const renderOption = (props, { symbol, name }) => (
   <li {...props}>
@@ -37,31 +34,27 @@ const filterOptions = (options, { inputValue }) => {
   return options.filter(({ symbol, name }) => symbol.match(r) || name.match(r))
 }
 
-const CompanySelect = ({ onChange, ...rest }) => {
-  return (
-    <Autocomplete
-      options={COMPANIES}
-      renderOption={renderOption}
-      renderInput={renderInput}
-      filterOptions={filterOptions}
-      getOptionSelected={getOptionSelected}
-      getOptionLabel={getOptionLabel}
-      autoHighlight
-      autoComplete
-      disableClearable
-      className='companySelect'
-      onChange={onChange}
-      {...rest}
-    />
-  )
-}
+const CompanySelect = ({ ...options }) => (
+  <Autocomplete
+    options={COMPANIES}
+    renderOption={renderOption}
+    renderInput={renderInput}
+    filterOptions={filterOptions}
+    getOptionSelected={getOptionSelected}
+    getOptionLabel={getOptionLabel}
+    autoHighlight
+    autoComplete
+    disableClearable
+    className='companySelect'
+    {...options}
+  />
+)
 
 CompanySelect.propTypes = {
-  defaultValue: PropTypes.string,
-  onChange:     PropTypes.func.required,
-}
-
-CompanySelect.defaultProps = {
+  options: PropTypes.shape({
+    defaultValue: PropTypes.string,
+    onChange:     PropTypes.func.required,
+  })
 }
 
 export default CompanySelect

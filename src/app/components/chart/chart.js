@@ -5,15 +5,10 @@ import moment from 'moment'
 import axios from 'axios'
 
 import LineChart from './lineChart'
-import {
-  Autocomplete,
-  Box,
-  TextField,
-} from '@material-ui/core'
+import { Box } from '@material-ui/core'
 
 import { COMPANY_HASH } from 'conf/companies'
-import { INTERVALS } from 'conf/intervals'
-import { CompanySelect } from 'components/selects'
+import { CompanySelect, IntervalSelect } from 'components/selects'
 
 import './style/chart.less'
 
@@ -21,15 +16,6 @@ const normalize = (data) => data.map((point) => {
   point.xName = moment(point.timeStamp).format('DD-HH:mm')
   return point
 })
-
-const IntervalInput = (params) => (
-  <TextField
-    {...params}
-    label='Interval'
-    variant='standard'
-    inputProps={{...params.inputProps}}
-  />
-)
 
 const getData = async ({ queryKey: [_key, { symbol, ...options }] }) => (
   axios.get(`/api/stock/${symbol}`, { params: options })
@@ -50,13 +36,7 @@ const Chart = ({ symbol: symb, interval: int }) => {
             onChange={(e, value) => setSymbol(value.symbol)}
             defaultValue={symb}
           />
-          <Autocomplete
-            options={INTERVALS}
-            renderInput={IntervalInput}
-            autoHighlight
-            autoComplete
-            disableClearable
-            className='intervalSelect'
+          <IntervalSelect
             onChange={(e, value) => setInterval(value)}
             defaultValue={int}
           />
