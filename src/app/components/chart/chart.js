@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useQuery } from 'react-query'
-import moment from 'moment'
 import axios from 'axios'
 
 import LineChart from './lineChart'
@@ -12,14 +11,9 @@ import { CompanySelect, IntervalSelect } from 'components/selects'
 
 import './style/chart.less'
 
-const normalize = (data) => data.map((point) => {
-  point.xName = moment(point.timeStamp).format('DD-HH:mm')
-  return point
-})
-
 const getData = async ({ queryKey: [_key, { symbol, ...options }] }) => (
   axios.get(`/api/stock/${symbol}`, { params: options })
-  .then((res) => normalize(res.data))
+  .then((res) => res.data)
 )
 
 const Chart = ({ symbol: symb, interval: int }) => {
