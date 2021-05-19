@@ -45,7 +45,7 @@ const CompanySelect = ({ ...options }) => (
     autoHighlight
     autoComplete
     disableClearable
-    className='companySelect'
+    className='companySelect select'
     {...options}
   />
 )

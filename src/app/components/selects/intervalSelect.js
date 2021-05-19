@@ -23,7 +23,7 @@ const IntervalSelect = ({ ...rest }) => (
     autoHighlight
     autoComplete
     disableClearable
-    className='intervalSelect'
+    className='intervalSelect select'
     {...rest}
   />
 )

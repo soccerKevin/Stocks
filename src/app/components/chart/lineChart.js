@@ -1,5 +1,5 @@
 import React from 'react'
-import { 
+import {
   Line,
   LineChart as ReLineChart,
   XAxis,
@@ -9,13 +9,13 @@ import {
 } from 'recharts'
 
 const LineChart = ({ data, width, height }) => (
-  <ReLineChart 
-    width={width} 
+  <ReLineChart
+    width={width}
     height={height}
     data={data}
     margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-    <XAxis dataKey='xName' />
-    <YAxis domain={['dataMin', 'dataMax']} />
+    <XAxis tick={{ fill: 'white' }} dataKey='xName' />
+    <YAxis tick={{ fill: 'white' }} domain={['dataMin', 'dataMax']} />
     <CartesianGrid strokeDasharray='3 3' />
     <Tooltip />
     <Line type='monotone' dataKey='close' stroke='#82ca9d' dot={false} />
