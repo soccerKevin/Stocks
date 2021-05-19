@@ -11,7 +11,6 @@ const DATA_POINT_KEYS = ['open', 'high', 'low', 'close', 'volume']
 
 const getOptions = ({ endpoint, symbol, interval, outputsize }) => ({
   baseURL,
-  method: 'get',
   params: {
     function: endpoint,
     symbol,
