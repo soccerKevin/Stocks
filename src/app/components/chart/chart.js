@@ -4,7 +4,7 @@ import { useQuery } from 'react-query'
 import axios from 'axios'
 
 import LineChart from './lineChart'
-import { Box } from '@material-ui/core'
+import { Box, Skeleton } from '@material-ui/core'
 
 import { COMPANY_HASH } from 'conf/companies'
 import { CompanySelect, IntervalSelect } from 'components/selects'
@@ -19,7 +19,7 @@ const getData = async ({ queryKey: [_key, { symbol, ...options }] }) => (
 const Chart = ({ symbol: symb, interval: int }) => {
   const [symbol, setSymbol] = useState(symb)
   const [interval, setInterval] = useState(int)
-  const query = useQuery([symbol, { symbol, interval }], getData)
+  const { data, isLoading } = useQuery([symbol, { symbol, interval }], getData)
 
   return (
     <Box className='chart'>
@@ -37,11 +37,16 @@ const Chart = ({ symbol: symb, interval: int }) => {
         </Box>
       </Box>
       <Box>
-        <LineChart
-          data={query.data}
-          width={730}
-          height={250}
-        />
+        {
+          isLoading
+            ? <Skeleton/>
+            : <LineChart
+              data={data}
+              width={730}
+              height={250}
+              xLabel={`${interval}min`}
+            />
+        }
       </Box>
     </Box>
   )
