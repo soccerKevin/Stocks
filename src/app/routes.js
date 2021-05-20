@@ -6,7 +6,7 @@ const routes = [
     routeOptions: {
       path:  ['/', ''],
       exact: true,
-    }
+    },
   },
   {
     Page: pages.Charts,

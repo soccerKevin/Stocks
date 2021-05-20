@@ -24,22 +24,23 @@
         "react"
     ],
     "rules": {
+        "comma-dangle": ["warn", {
+            "functions": "never",
+            "arrays":  "always-multiline",
+            "objects": "always-multiline",
+            "imports": "always-multiline",
+            "exports": "always-multiline"
+        }],
         "indent": ["warn", 2, { "MemberExpression": 0 }],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "warn",
-            "single",
-            { "avoidEscape": true }
-        ],
-        "semi": [
-            "warn",
-            "never"
-        ],
+        "linebreak-style": ["error", "unix"],
+        "multiline-ternary": ["warn", "always-multiline"],
         "no-unused-vars": ["warn", { "varsIgnorePattern": "styles", "argsIgnorePattern": "^_" }],
         "no-restricted-exports": ["error", { "restrictedNamedExports": [] }],
-        "react/prop-types": 0
+        "no-multiple-empty-lines": ["warn"],
+        "operator-linebreak": ["warn", "before"],
+        "quotes": ["warn", "single", { "avoidEscape": true }],
+        "react/prop-types": 0,
+        "react/self-closing-comp": ["warn"],
+        "semi": ["warn", "never"]
     }
 }

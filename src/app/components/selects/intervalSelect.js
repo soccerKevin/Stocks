@@ -32,7 +32,7 @@ IntervalSelect.propTypes = {
   options: PropTypes.shape({
     defaultValue: PropTypes.string,
     onChange:     PropTypes.func.required,
-  })
+  }),
 }
 
 export default IntervalSelect
