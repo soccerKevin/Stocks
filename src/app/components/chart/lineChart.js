@@ -11,11 +11,13 @@ import {
 } from 'recharts'
 
 const tickStyle = { fill: 'white', fontSize: '1.3rem' }
+const tooltipContentStyle = { backgroundColor: 'black', border: 'none' }
 
 const yFormatter = (val) => isNumber(val) && isFinite(val) ? val.toFixed(2) : val
-const xFormatter = (val) => moment(val).format('DD-HH:mm')
+const xFormatter = (val) => moment(val).format('h:mmA')
 
-const tooltipFormatter = (val, _name, _props) => isNumber(val) && isFinite(val) ? val.toFixed(2) : val
+// const tooltipFormatter = (val, _name, _props) => isNumber(val) && isFinite(val) ? val.toFixed(2) : val
+const tooltipFormatter = (val, _name, _props) => moment(val).format('h:mmA')
 
 const LineChart = ({ data, width, height, xLabel }) => (
   <ReLineChart
@@ -28,6 +30,8 @@ const LineChart = ({ data, width, height, xLabel }) => (
       tickFormatter={xFormatter}
       dataKey='timestamp'
       label={xLabel}
+      interval='preserveStartEnd'
+      angle={-45}
       // ticks={[ data[0].timestamp, data[-1].timestamp ]}
     />
     <YAxis
@@ -39,7 +43,7 @@ const LineChart = ({ data, width, height, xLabel }) => (
       tooltipFormatter={tooltipFormatter}
       filterNull
       active
-      wrapperStyle={{ backgroundColor: 'black' }}
+      contentStyle={tooltipContentStyle}
     />
     <Line type='monotone' dataKey='close' stroke='#03d9ff' dot={false} />
     <Line type='monotone' dataKey='open' stroke='#ff03c4' dot={false} />
