@@ -41,6 +41,7 @@
         "quotes": ["warn", "single", { "avoidEscape": true }],
         "react/prop-types": 0,
         "react/self-closing-comp": ["warn"],
+        "react/jsx-tag-spacing": ["warn", { "beforeSelfClosing": "always" }],
         "semi": ["warn", "never"]
     }
 }
