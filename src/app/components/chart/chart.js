@@ -3,8 +3,11 @@ import PropTypes from 'prop-types'
 import { useQuery } from 'react-query'
 import axios from 'axios'
 
-import LineChart from './lineChart'
 import { Box, Skeleton } from '@material-ui/core'
+import { ResponsiveContainer } from 'recharts'
+import { Rnd } from 'react-rnd'
+
+import LineChart from './lineChart'
 
 import { COMPANY_HASH } from 'conf/companies'
 import { CompanySelect, IntervalSelect } from 'components/selects'
@@ -22,7 +25,7 @@ const Chart = ({ symbol: symb, interval: int }) => {
   const { data, isLoading } = useQuery([symbol, { symbol, interval }], getData)
 
   return (
-    <Box className='chart'>
+    <Rnd className='chart' default={{ x: 10, y: 10, width: 730, height: 250 }}>
       <Box className='header'>
         <h2 className='companyName'>{COMPANY_HASH[symbol]}</h2>
         <Box className='controls'>
@@ -37,18 +40,15 @@ const Chart = ({ symbol: symb, interval: int }) => {
         </Box>
       </Box>
       <Box>
-        {
-          isLoading
-            ? <Skeleton/>
-            : <LineChart
-              data={data}
-              width={730}
-              height={250}
-              xLabel={`${interval}min`}
-            />
-        }
+        <ResponsiveContainer width='100%' height='80%'>
+          {
+            isLoading
+              ? <Skeleton />
+              : <LineChart data={data} />
+          }
+        </ResponsiveContainer>
       </Box>
-    </Box>
+    </Rnd>
   )
 }
 
