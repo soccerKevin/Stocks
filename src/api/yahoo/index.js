@@ -12,7 +12,7 @@ const DATA_POINT_KEYS = ['open', 'high', 'low', 'close', 'volume', 'timestamp']
 const getOptions = ({ endpoint, symbol, interval, outputsize }) => ({
   baseURL,
   params: {
-    interval: '5m',
+    interval,
     symbol,
     range: '1d',
     region: 'US',
