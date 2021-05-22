@@ -31,7 +31,7 @@ const getOptionLabel = (option) => option.symbol || option
 
 const filterOptions = (options, { inputValue }) => {
   const r = new RegExp(`^${inputValue}`, 'i')
-  return options.filter(({ symbol, name }) => symbol.match(r) || name.match(r))
+  return options.filter(({ symbol, name }) => symbol.match(r) || name.match(r)).slice(0, 100)
 }
 
 const CompanySelect = ({ ...options }) => (
