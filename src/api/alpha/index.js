@@ -27,7 +27,7 @@ const normalize = (data) => {
     const [ timeStamp, pointsData ] = args;
 
     const output = zipObject(DATA_POINT_KEYS, values(pointsData))
-    output.timeStamp = timeStamp
+    output.timestamp = timeStamp
 
     return output
   })
