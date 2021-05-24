@@ -1,5 +1,5 @@
-const endpoints = {
-  TIME_SERIES_INTRADAY: 'TIME_SERIES_INTRADAY'
-}
+export const TIME_SERIES_INTRADAY = 'TIME_SERIES_INTRADAY'
 
-module.exports = endpoints
+const endpoints = { TIME_SERIES_INTRADAY }
+
+export default endpoints

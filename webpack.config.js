@@ -1,11 +1,11 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import ESLintPlugin from 'eslint-webpack-plugin'
 
 const config = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './public',
+    port: 3000,
   },
   mode: 'development',
   module: {
@@ -17,8 +17,8 @@ const config = {
           loader: 'babel-loader',
           options: {
             presets: [
-              '@babel/preset-env', 
-              '@babel/preset-react', 
+              '@babel/preset-env',
+              '@babel/preset-react',
             ]
           }
         }
@@ -44,7 +44,7 @@ const config = {
             loader: "less-loader",
             options: {
               lessOptions: {
-                paths: [path.resolve(__dirname, "src/")],
+                paths: ["/src/"],
               },
             },
           },
@@ -54,7 +54,7 @@ const config = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'public'),
+    path: '/public',
     clean: true,
     publicPath: '/',
   },
@@ -72,14 +72,14 @@ const config = {
   ],
   resolve: {
     alias: {
-      api: path.resolve(__dirname, './src/api'),
-      app: path.resolve(__dirname, './src/app'),
-      components: path.resolve(__dirname, './src/app/components'),
-      conf: path.resolve(__dirname, './src/conf'),
-      images: path.resolve(__dirname, './src/app/images'),
-      pages: path.resolve(__dirname, './src/app/pages'),
+      api: '/src/api',
+      app: '/src/app',
+      components: '/src/app/components',
+      conf: '/src/conf',
+      images: '/src/app/images',
+      pages: '/src/app/pages',
     },
   },
 };
 
-module.exports = config;
+export default config

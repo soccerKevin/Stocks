@@ -3,15 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "DEBUG='stocks*' node src/server/index.js",
+    "dev": "DEBUG='stocks*' NODE_PATH='.' node --experimental-specifier-resolution=node src/server/index.js",
     "watch": "webpack --watch",
-    "start": "webpack serve --open",
+    "start": "NODE_OPTIONS='--experimental-specifier-resolution=node' webpack serve",
     "build": "webpack",
     "alpha": "node src/api/alpha/index.js"
   },
-  "author": "",
+  "exports": {
+    "./*": "./*"
+  },
+  "author": "Kevin Townsend",
   "license": "UNLICENSED",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.14.0",
@@ -35,6 +39,7 @@
     "less": "^4.1.1",
     "less-loader": "^8.1.1",
     "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "moment": "^2.29.1",
     "prop-types": "^15.6.0",
     "react": "^17.0.2",

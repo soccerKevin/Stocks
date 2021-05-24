@@ -1,16 +1,15 @@
-var debug = require('debug')('stocks')
-const express = require('express')
-const webpack = require('webpack')
-const path = require('path')
-const webpackDevMiddleware = require('webpack-dev-middleware')
+import Debug from 'debug'
+import express from 'express'
+import webpack from 'webpack'
+import path from 'path'
+import webpackDevMiddleware from 'webpack-dev-middleware'
+import webpackConfig from 'stocks/webpack.config.js'
+import config from 'stocks/config/index'
+import apiRouter from './api/router'
 
+const debug = Debug('stocks')
 const app = express()
-const webpackConfig = require(path.resolve('webpack.config.js'))
 const compiler = webpack(webpackConfig)
-
-const apiRouter = require('./api/router.js')
-
-const config = require(path.resolve('config/index.js'));
 
 const { server: { port } } = config;
 

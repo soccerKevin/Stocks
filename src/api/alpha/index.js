@@ -1,15 +1,17 @@
-var debug = require('debug')('stocks:api:alpha')
-const axios = require('axios')
-const path = require('path')
-const { zipObject, values, entries } = require('lodash')
+import Debug from 'debug'
+import axios from 'axios'
+import path from 'path'
+import { zipObject, values, entries } from 'lodash-es'
 
-const { alpha: { apikey } } = require(path.resolve('config/index.js'))
+import config from 'stocks/config/index.js'
+
+const debug = Debug('stocks:api:alpha')
 
 const baseURL = 'https://www.alphavantage.co'
 const route = '/query'
 const DATA_POINT_KEYS = ['open', 'high', 'low', 'close', 'volume']
 
-const getOptions = ({ endpoint, symbol, interval, outputsize }) => ({
+export const getOptions = ({ endpoint, symbol, interval, outputsize }) => ({
   baseURL,
   params: {
     function: endpoint,
@@ -20,7 +22,7 @@ const getOptions = ({ endpoint, symbol, interval, outputsize }) => ({
   }
 })
 
-const normalize = (data) => {
+export const normalize = (data) => {
   const [ metaData, intervals ] = values(data)
 
   const normalizedData = entries(intervals).map((args) => {
@@ -43,7 +45,7 @@ const normalize = (data) => {
   symbol: required
   interval: required
 */
-const getStock = (options) => {
+export const getStock = (options) => {
   const routeOptions = getOptions(options)
   debug('Fetching: ', routeOptions)
   return axios.get(route, routeOptions)
@@ -52,5 +54,3 @@ const getStock = (options) => {
     console.log(error)
   })
 }
-
-module.exports = { getStock }

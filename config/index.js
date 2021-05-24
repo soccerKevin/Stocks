@@ -1,12 +1,17 @@
-require('dotenv').config()
+import dotenv from 'dotenv'
 
-const merge = require('deepmerge')
+import merge from 'deepmerge'
+
+dotenv.config()
 
 const env = process.env.NODE_ENV
 
-const defaultConfig = require('./default.js')
-const envConfig = require(`./${env}.js`)
+import defaultConfig from './default'
+import devConfig from './development'
+import prodConfig from './production'
+
+const envConfig = env === 'production' ? prodConfig : devConfig
 
 const config = merge(defaultConfig, envConfig)
 
-module.exports = config
+export default config

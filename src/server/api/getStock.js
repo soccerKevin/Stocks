@@ -1,21 +1,22 @@
-var debug = require('debug')('stocks:api')
-const path = require('path')
+import Debug from 'debug'
 
-const { getStock: getAlphaStock } = require(path.resolve('src/api/alpha/index.js'))
+import { getStock as getAlphaStock } from 'stocks/src/api/alpha/index'
 // const { getStock: getYahooStock } = require(path.resolve('src/api/yahoo/index.js'))
-const { TIME_SERIES_INTRADAY } = require(path.resolve('src/api/alpha/endpoints.js'))
+import { TIME_SERIES_INTRADAY } from 'stocks/src/api/alpha/endpoints'
 
-const options = ({ symbol, interval }) => ({
+const debug = Debug('stocks:api')
+
+export const options = ({ symbol, interval }) => ({
   endpoint: TIME_SERIES_INTRADAY,
   symbol,
   interval,
 })
 
-const getStock = async ({ params, query }, res) => {
+export const getStock = async ({ params, query }, res) => {
   debug('getStock', params, query)
   const data = await getAlphaStock(options({ ...params, ...query }))
 
   res.status(200).json(data)
 }
 
-module.exports = getStock
+export default getStock

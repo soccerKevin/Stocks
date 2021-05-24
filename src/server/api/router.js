@@ -1,8 +1,8 @@
-var express = require('express')
-var router = express.Router()
+import express from 'express'
+import getStock from './getStock'
 
-const getStock = require('./getStock')
+var router = express.Router()
 
 router.get('/stock/:symbol', getStock)
 
-module.exports = router
+export default router
