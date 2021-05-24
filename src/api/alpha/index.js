@@ -24,7 +24,19 @@ export const getOptions = ({ endpoint, symbol, interval, outputsize }) => ({
   }
 })
 
+export const status200Errors = (response) => {
+  if (response.data.Note) {
+    const note = response.data.Note
+    if (note.includes('API call frequency')) throw new Error('APILimitReached')
+  }
+  if (response.data['Error Message']) {
+    const msg = response.data['Error Message']
+    if (msg.includes('Invalid API call')) throw new Error('Invalid API call')
+  }
+}
+
 export const normalize = (data) => {
+
   const [ metaData, intervals ] = values(data)
 
   const normalizedData = entries(intervals).map((args) => {
@@ -51,8 +63,9 @@ export const getStock = (options) => {
   const routeOptions = getOptions(options)
   debug('Fetching: ', routeOptions)
   return axios.get(route, routeOptions)
-  .then((response) => normalize(response.data))
-  .catch((error) => {
-    console.log(error)
+  .then((response) => {
+    status200Errors(response)
+    return response
   })
+  .then((response) => normalize(response.data))
 }

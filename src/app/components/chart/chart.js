@@ -19,10 +19,16 @@ const getData = async ({ queryKey: [_key, { symbol, ...options }] }) => (
   .then((res) => res.data)
 )
 
+const retry = (failureCount, error) => {
+  if (error.message.includes('500')) return false
+  if (failureCount >= 2) return false
+  return true
+}
+
 const Chart = ({ symbol: symb, interval: int }) => {
   const [symbol, setSymbol] = useState(symb)
   const [interval, setInterval] = useState(int)
-  const { data, isLoading } = useQuery([symbol, { symbol, interval }], getData)
+  const { data, isLoading, isSuccess } = useQuery([symbol, { symbol, interval }], getData, { retry })
 
   return (
     <Rnd className='chart' default={{ x: 10, y: 10, width: 730, height: 250 }}>
@@ -42,7 +48,7 @@ const Chart = ({ symbol: symb, interval: int }) => {
       <Box>
         <ResponsiveContainer width='100%' height='80%'>
           {
-            isLoading
+            isLoading && isSuccess
               ? <Skeleton />
               : <LineChart data={data} />
           }

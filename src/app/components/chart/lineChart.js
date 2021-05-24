@@ -14,7 +14,7 @@ const tickStyle = { fill: 'white', fontSize: '1.3rem' }
 const tooltipContentStyle = { backgroundColor: 'black', border: 'none' }
 
 const yFormatter = (val) => isNumber(val) && isFinite(val) ? `$${val.toFixed(2)}` : val
-const xFormatter = (val) => moment(val).format('h:mmA')
+const xFormatter = (val) => moment(new Date(val)).format('h:mmA')
 
 // const tooltipFormatter = (val, _name, _props) => isNumber(val) && isFinite(val) ? val.toFixed(2) : val
 const tooltipFormatter = (val, _name, _props) => moment(val).format('h:mmA')
