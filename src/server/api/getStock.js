@@ -18,8 +18,7 @@ export const getStock = async ({ params, query }, res, next) => {
     const data = await getAlphaStock(options({ ...params, ...query }))
     res.status(200).json(data)
   } catch (error) {
-    debug('Error: ', error)
-    res.status(500).json({ error: error.message })
+    next(error)
   }
 }
 
