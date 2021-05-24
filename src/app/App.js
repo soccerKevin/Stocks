@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import StyledEngineProvider from '@material-ui/core/StyledEngineProvider'
+import { StyledEngineProvider } from '@material-ui/core'
 
 import Menu from './menu'
 import Switch from './switch'

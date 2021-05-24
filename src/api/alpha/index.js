@@ -3,9 +3,11 @@ import axios from 'axios'
 import path from 'path'
 import { zipObject, values, entries } from 'lodash-es'
 
-import config from 'stocks/config/index.js'
+import config from 'stocks/config'
 
 const debug = Debug('stocks:api:alpha')
+
+const { alpha: { apikey } } = config
 
 const baseURL = 'https://www.alphavantage.co'
 const route = '/query'
