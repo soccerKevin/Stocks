@@ -1,6 +1,5 @@
 import Debug from 'debug'
 import axios from 'axios'
-import path from 'path'
 import { zipObject, values, entries } from 'lodash-es'
 
 import config from 'stocks/config'
@@ -21,7 +20,7 @@ export const getOptions = ({ endpoint, symbol, interval, outputsize }) => ({
     interval,
     outputsize: outputsize || 68,
     apikey,
-  }
+  },
 })
 
 export const status200Errors = (response) => {
@@ -37,10 +36,10 @@ export const status200Errors = (response) => {
 
 export const normalize = (data) => {
 
-  const [ metaData, intervals ] = values(data)
+  const [ _metaData, intervals ] = values(data)
 
   const normalizedData = entries(intervals).map((args) => {
-    const [ timeStamp, pointsData ] = args;
+    const [ timeStamp, pointsData ] = args
 
     const output = zipObject(DATA_POINT_KEYS, values(pointsData))
     output.timestamp = timeStamp

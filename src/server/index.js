@@ -11,7 +11,7 @@ const debug = Debug('stocks')
 const app = express()
 const compiler = webpack(webpackConfig)
 
-const { server: { port } } = config;
+const { server: { port } } = config
 
 app.use(
   webpackDevMiddleware(compiler, {

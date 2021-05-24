@@ -34,7 +34,7 @@
         "indent": ["warn", 2, { "MemberExpression": 0 }],
         "linebreak-style": ["error", "unix"],
         "multiline-ternary": ["warn", "always-multiline"],
-        "no-unused-vars": ["warn", { "varsIgnorePattern": "styles", "argsIgnorePattern": "^_" }],
+        "no-unused-vars": ["warn", { "varsIgnorePattern": "^_|styles", "argsIgnorePattern": "^_" }],
         "no-restricted-exports": ["error", { "restrictedNamedExports": [] }],
         "no-multiple-empty-lines": ["warn"],
         "operator-linebreak": ["warn", "before"],
