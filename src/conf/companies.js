@@ -17726,11 +17726,11 @@ export const COMPANIES = [
   name:   "Lightbridge",
   type:   "company",
 },
-{
-  symbol: "LTC",
-  name:   "LTC Properties",
-  type:   "company",
-},
+// {
+//   symbol: "LTC",
+//   name:   "LTC Properties",
+//   type:   "company",
+// },
 {
   symbol: "LTGHY",
   name:   "Life Healthcare Group Holdings",
