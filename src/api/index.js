@@ -1,6 +1,6 @@
-export { getStock } from './getStock'
+export { getCandle } from './getCandle'
 
-import * as alphaGetStock from './alpha/getStock'
-import * as yahooGetStock from './yahoo/getStock'
+import * as alphaGetCandle from './alpha/getCandle'
+import * as yahooGetCandle from './yahoo/getCandle'
 
-export const getStocks = { alpha: alphaGetStock, yahoo: yahooGetStock }
+export const getCandles = { alpha: alphaGetCandle, yahoo: yahooGetCandle }

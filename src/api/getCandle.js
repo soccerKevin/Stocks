@@ -1,13 +1,13 @@
 import Debug from 'debug'
-import { getStocks } from './'
+import { getCandles } from './'
 import axios from 'axios'
 
 // get a stock from any api in the arsenal
-export const getStock = (api, options) => {
+export const getCandle = (api, options) => {
   const debug = Debug(`stocks:api:${api}`)
 
   // handlers for the api
-  const { getOptions, status200Errors, normalize } = getStocks[api]
+  const { getOptions, status200Errors, normalize } = getCandles[api]
 
   // get customized options for api endpoint
   const routeOptions = getOptions ? getOptions(options) : options

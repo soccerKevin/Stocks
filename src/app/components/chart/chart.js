@@ -15,7 +15,7 @@ import { CompanySelect, IntervalSelect } from 'components/selects'
 import './style/chart.less'
 
 const getData = async ({ queryKey: [_key, { symbol, ...options }] }) => (
-  axios.get(`/api/stock/${symbol}`, { params: options })
+  axios.get(`/api/stock/${symbol}/candle`, { params: options })
   .then((res) => res.data)
 )
 
