@@ -5,22 +5,26 @@ import { TICKERS_HASH } from 'stocks/src/conf/tickers'
 
 const { finnhub: { apiKey } } = config
 
-const getRoute = (symbol) => TICKERS_HASH[symbol].type == 'company' ? 'stock' : 'crypto'
+export const getOptions = ({ symbol: symb, interval, outputsize }) => {
+  const { type } = TICKERS_HASH[symb]
+  const route = type == 'crypto' ? 'crypto' : 'stock'
+  const symbol = `${type === 'crypto' ? `BINANCE:` : ''}${symb}`
 
-export const getOptions = ({ symbol, interval, outputsize }) => ({
-  baseURL: 'https://finnhub.io',
-  url: `/api/v1/${getRoute(symbol)}/candle`,
-  params: {
-    symbol,
-    resolution: INTERVALS_HASH[interval].finnhub,
-    token: apiKey,
-    from:  moment().startOf('day').unix(),
-    to:    moment().unix(),
-  },
-})
+  return {
+    baseURL: 'https://finnhub.io',
+    url: `/api/v1/${route}/candle`,
+    params: {
+      symbol,
+      resolution: INTERVALS_HASH[interval].finnhub,
+      token: apiKey,
+      from:  moment().startOf('day').unix(),
+      to:    moment().unix(),
+    },
+  }
+}
 
-export const status200Error = ({ data }) => {
-  if (data.s === 'no_data') throw new Error('noData')
+export const status200Errors = ({ data: { s } }) => {
+  if (s == 'no_data') throw new Error('noData')
 }
 
 export const normalize = (data) => {

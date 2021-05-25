@@ -36,11 +36,11 @@ export const CRYPTOS = [
   },
 ]
 
-export const SYMBOLS_OBJ = {}
+const cryptoHash = {}
 
-export const SYMBOLS = CRYPTOS.map((crypto) => {
-  SYMBOLS_OBJ[crypto.symbol] = crypto.symbol
+export const CRYPTO_SYMBOLS = CRYPTOS.map((crypto) => {
+  cryptoHash[crypto.symbol] = crypto
   return crypto.symbol
 })
 
-export const CRYPTO_HASH = CRYPTOS.reduce((acc, crypto) => ({ ...acc, [crypto.symbol]: crypto.name }), {})
+export const CRYPTO_HASH = cryptoHash

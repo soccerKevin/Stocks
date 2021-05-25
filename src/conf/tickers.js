@@ -1,13 +1,9 @@
-import { COMPANIES } from './companies'
-import { CRYPTOS } from './cryptos'
+import { COMPANIES, COMPANY_SYMBOLS, COMPANY_HASH } from './companies'
+import { CRYPTOS, CRYPTO_SYMBOLS, CRYPTO_HASH  } from './cryptos'
 
 export const TICKERS = COMPANIES.concat(CRYPTOS)
 
-export const SYMBOLS_OBJ = {}
+export const SYMBOLS = COMPANY_SYMBOLS.concat(CRYPTO_SYMBOLS)
 
-export const SYMBOLS = TICKERS.map((ticker) => {
-  SYMBOLS_OBJ[ticker.symbol] = ticker.symbol
-  return ticker.symbol
-})
-
-export const TICKERS_HASH = TICKERS.reduce((acc, ticker) => ({ ...acc, [ticker.symbol]: ticker }), {})
+// losing a couple of company tickers, cryptos are overriding them
+export const TICKERS_HASH = { ...COMPANY_HASH, ...CRYPTO_HASH }

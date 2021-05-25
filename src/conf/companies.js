@@ -3491,11 +3491,11 @@ export const COMPANIES = [
   name:   "Atreca",
   type:   "company",
 },
-{
-  symbol: "BCH",
-  name:   "Banco de Chile SA",
-  type:   "company",
-},
+// {
+//   symbol: "BCH",
+//   name:   "Banco de Chile SA",
+//   type:   "company",
+// },
 {
   symbol: "BCIC",
   name:   "BCC Investment",
@@ -10081,11 +10081,11 @@ export const COMPANIES = [
   name:   "E.merge Technology Acquisition",
   type:   "company",
 },
-{
-  symbol: "ETH",
-  name:   "Ethan Allen Interiors",
-  type:   "company",
-},
+// {
+//   symbol: "ETH",
+//   name:   "Ethan Allen Interiors",
+//   type:   "company",
+// },
 {
   symbol: "ETHE",
   name:   "Grayscale Ethereum Trust",
@@ -32437,11 +32437,11 @@ export const COMPANIES = [
   type:   "company",
 }]
 
-export const SYMBOLS_OBJ = {}
+const companyHash = {}
 
-export const SYMBOLS = COMPANIES.map((company) => {
-  SYMBOLS_OBJ[company.symbol] = company.symbol
+export const COMPANY_SYMBOLS = COMPANIES.map((company) => {
+  companyHash[company.symbol] = company.symbol
   return company.symbol
 })
 
-export const COMPANY_HASH = COMPANIES.reduce((acc, company) => ({ ...acc, [company.symbol]: company.name }), {})
+export const COMPANY_HASH = companyHash
