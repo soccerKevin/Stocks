@@ -7,7 +7,7 @@ import styles from './styles/menu.less'
 const paths = [
   {
     label: 'My Charts',
-    to: '/myCharts',
+    to:    '/myCharts',
   },
 ]
 

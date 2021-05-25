@@ -32,6 +32,10 @@
             "exports": "always-multiline"
         }],
         "indent": ["warn", 2, { "MemberExpression": 0 }],
+        "key-spacing": ["warn", {
+          "align": { "on": "value", "mode": "minimum" },
+          "multiLine": { "mode": "minimum" }
+        }],
         "linebreak-style": ["error", "unix"],
         "multiline-ternary": ["warn", "always-multiline"],
         "no-unused-vars": ["warn", { "varsIgnorePattern": "^_|styles", "argsIgnorePattern": "^_" }],

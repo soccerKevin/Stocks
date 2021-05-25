@@ -10,11 +10,11 @@ const DATA_POINT_KEYS = ['open', 'high', 'low', 'close', 'volume']
 
 export const getOptions = ({ symbol, interval, outputsize }) => ({
   baseURL: 'https://www.alphavantage.co',
-  url: '/query',
-  params: {
-    function: TIME_SERIES_INTRADAY,
+  url:     '/query',
+  params:  {
+    function:   TIME_SERIES_INTRADAY,
     symbol,
-    interval: INTERVALS_HASH[interval].alpha,
+    interval:   INTERVALS_HASH[interval].alpha,
     outputsize: outputsize || 68,
     apikey,
   },

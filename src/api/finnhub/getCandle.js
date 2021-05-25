@@ -13,13 +13,13 @@ export const getOptions = ({ symbol: symb, interval }) => {
 
   return {
     baseURL: 'https://finnhub.io',
-    url: `/api/v1/${route}/candle`,
-    params: {
+    url:     `/api/v1/${route}/candle`,
+    params:  {
       symbol,
       resolution: INTERVALS_HASH[interval].finnhub,
-      token: apiKey,
-      from:  moment().startOf('day').unix(),
-      to:    moment().unix(),
+      token:      apiKey,
+      from:       moment().startOf('day').unix(),
+      to:         moment().unix(),
     },
   }
 }

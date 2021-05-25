@@ -6,12 +6,12 @@ const { yahoo: { apiKey, apiHost } } = config
 
 export const getOptions = ({ symbol, interval }) => ({
   baseURL: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com',
-  url: '/stock/v2/get-chart',
-  params: {
+  url:     '/stock/v2/get-chart',
+  params:  {
     interval: INTERVALS_HASH[interval].yahoo,
     symbol,
-    range: '1d',
-    region: 'US',
+    range:    '1d',
+    region:   'US',
   },
   headers: {
     'x-rapidapi-key':  apiKey,

@@ -2,14 +2,14 @@ import * as pages from 'pages'
 
 const routes = [
   {
-    Page: pages.Home,
+    Page:         pages.Home,
     routeOptions: {
       path:  ['/', ''],
       exact: true,
     },
   },
   {
-    Page: pages.Charts,
+    Page:         pages.Charts,
     routeOptions: {
       path:  '/mycharts',
       exact: true,
