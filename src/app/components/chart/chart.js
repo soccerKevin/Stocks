@@ -29,7 +29,7 @@ const Chart = ({ symbol: symb, interval: int }) => {
   const [symbol, setSymbol] = useState(symb)
   const [interval, setInterval] = useState(int)
   const { data, isLoading, isSuccess } = useQuery([symbol, { symbol, interval }], getData, { retry })
-  console.log('data: ', data)
+
   return (
     <Rnd className='chart' default={{ x: 10, y: 10, width: 730, height: 250 }}>
       <Box className='header'>
@@ -65,7 +65,7 @@ Chart.propTypes = {
 
 Chart.defaultProps = {
   symbol: 'GROW',
-  interval: '5min',
+  interval: '1min',
 }
 
 export default Chart
