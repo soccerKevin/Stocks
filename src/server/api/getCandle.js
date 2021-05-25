@@ -7,7 +7,7 @@ const debug = Debug('stocks:api')
 export const getCandle = async ({ params, query }, res, next) => {
   debug('getCandle', params, query)
   try {
-    const data = await apiGetCandle('alpha', { ...params, ...query })
+    const data = await apiGetCandle('finnhub', { ...params, ...query })
     res.status(200).json(data)
   } catch (error) {
     next(error)

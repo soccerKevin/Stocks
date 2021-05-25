@@ -2,6 +2,8 @@ import { zipObject, values, entries } from 'lodash-es'
 
 import config from 'stocks/config'
 
+import { INTERVALS_HASH } from 'stocks/src/conf/intervals'
+
 const { alpha: { apikey } } = config
 const TIME_SERIES_INTRADAY = 'TIME_SERIES_INTRADAY'
 const DATA_POINT_KEYS = ['open', 'high', 'low', 'close', 'volume']
@@ -12,7 +14,7 @@ export const getOptions = ({ symbol, interval, outputsize }) => ({
   params: {
     function: TIME_SERIES_INTRADAY,
     symbol,
-    interval,
+    interval: INTERVALS_HASH[interval].alpha,
     outputsize: outputsize || 68,
     apikey,
   },

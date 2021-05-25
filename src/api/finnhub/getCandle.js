@@ -2,26 +2,26 @@ import moment from 'moment'
 import config from 'stocks/config'
 import { INTERVALS_HASH } from 'stocks/src/conf/intervals'
 
-const { yahoo: { apiKey, apiHost } } = config
+const { finnhub: { apiKey } } = config
 
-export const getOptions = ({ symbol, interval }) => ({
-  baseURL: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com',
-  url: '/stock/v2/get-chart',
+export const getOptions = ({ symbol, interval, outputsize }) => ({
+  baseURL: 'https://finnhub.io',
+  url: '/api/v1/stock/candle',
   params: {
-    interval: INTERVALS_HASH[interval].yahoo,
     symbol,
-    range: '1d',
-    region: 'US',
-  },
-  headers: {
-    'x-rapidapi-key':  apiKey,
-    'x-rapidapi-host': apiHost,
+    resolution: INTERVALS_HASH[interval].finnhub,
+    token: apiKey,
+    from:  moment().startOf('day').unix(),
+    to:    moment().unix(),
   },
 })
 
+export const status200Error = ({ data }) => {
+  if (data.s === 'no_data') throw new Error('noData')
+}
+
 export const normalize = (data) => {
-  const { timestamp: timestamps, indicators } = data.chart.result[0]
-  const { volume, open, close, high, low } = indicators.quote[0]
+  const { c: close, h: high, l: low, o: open, t: timestamps, v: volume } = data
   const result = timestamps.reduce((acc, timestamp, i) => (
     [
       ...acc,

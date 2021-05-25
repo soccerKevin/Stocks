@@ -1,16 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { isObject } from 'lodash'
 
 import { Autocomplete, TextField } from '@material-ui/core'
 
-import { INTERVALS_HASH } from 'conf/intervals'
+import { INTERVALS } from 'conf/intervals'
 
 import './style/intervalSelect.less'
 
-const renderOption = (props, { label }) => (
+const renderOption = (props, option) => (
   <li {...props}>
-    <span>{label}</span>
+    <span>{option}</span>
   </li>
 )
 
@@ -23,24 +22,16 @@ const renderInput = (params) => (
   />
 )
 
-const getOptionSelected = ({ label: oLabel, value: oValue }, val) => {
-  if (isObject(val)) return oLabel === val.label
-  const regex = new RegExp(val, 'i')
-  return oLabel.match(regex) || oValue.match(regex)
-}
-
-const IntervalSelect = ({ onChange, ...rest }) => (
+const IntervalSelect = (props) => (
   <Autocomplete
-    options={INTERVALS_HASH}
+    options={INTERVALS}
     renderInput={renderInput}
     renderOption={renderOption}
-    getOptionSelected={getOptionSelected}
     autoHighlight
     autoComplete
     disableClearable
     className='intervalSelect select'
-    onChange={(e, { value }) => onChange(e, value)}
-    {...rest}
+    {...props}
   />
 )
 
