@@ -1,12 +1,15 @@
 import moment from 'moment'
 import config from 'stocks/config'
 import { INTERVALS_HASH } from 'stocks/src/conf/intervals'
+import { TICKERS_HASH } from 'stocks/src/conf/tickers'
 
 const { finnhub: { apiKey } } = config
 
+const getRoute = (symbol) => TICKERS_HASH[symbol].type == 'company' ? 'stock' : 'crypto'
+
 export const getOptions = ({ symbol, interval, outputsize }) => ({
   baseURL: 'https://finnhub.io',
-  url: '/api/v1/stock/candle',
+  url: `/api/v1/${getRoute(symbol)}/candle`,
   params: {
     symbol,
     resolution: INTERVALS_HASH[interval].finnhub,

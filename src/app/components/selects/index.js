@@ -1,4 +1,4 @@
 import './style/select.less'
 
-export { default as CompanySelect } from './companySelect'
+export { default as TickerSelect } from './tickerSelect'
 export { default as IntervalSelect } from './intervalSelect'

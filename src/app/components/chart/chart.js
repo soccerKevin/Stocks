@@ -9,8 +9,8 @@ import { Rnd } from 'react-rnd'
 
 import LineChart from './lineChart'
 
-import { COMPANY_HASH } from 'conf/companies'
-import { CompanySelect, IntervalSelect } from 'components/selects'
+import { TICKERS_HASH } from 'conf/tickers'
+import { TickerSelect, IntervalSelect } from 'components/selects'
 
 import './style/chart.less'
 
@@ -33,9 +33,9 @@ const Chart = ({ symbol: symb, interval: int }) => {
   return (
     <Rnd className='chart' default={{ x: 10, y: 10, width: 730, height: 250 }}>
       <Box className='header'>
-        <h2 className='companyName'>{COMPANY_HASH[symbol]}</h2>
+        <h2 className='tickerName'>{TICKERS_HASH[symbol].name}</h2>
         <Box className='controls'>
-          <CompanySelect
+          <TickerSelect
             onChange={(e, value) => setSymbol(value.symbol)}
             defaultValue={symb}
           />

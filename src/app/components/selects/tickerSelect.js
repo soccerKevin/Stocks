@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 import { Autocomplete, TextField } from '@material-ui/core'
 
-import { COMPANIES } from 'conf/companies'
+import { TICKERS } from 'conf/tickers'
 
-import './style/companySelect.less'
+import './style/tickerSelect.less'
 
 const renderOption = (props, { symbol, name }) => (
   <li {...props}>
@@ -16,7 +16,7 @@ const renderOption = (props, { symbol, name }) => (
 const renderInput = (params) => (
   <TextField
     {...params}
-    label='Company'
+    label='Ticker'
     variant='standard'
     inputProps={{...params.inputProps}}
   />
@@ -34,9 +34,9 @@ const filterOptions = (options, { inputValue }) => {
   return options.filter(({ symbol, name }) => symbol.match(r) || name.match(r)).slice(0, 100)
 }
 
-const CompanySelect = ({ ...options }) => (
+const TickerSelect = ({ ...options }) => (
   <Autocomplete
-    options={COMPANIES}
+    options={TICKERS}
     renderOption={renderOption}
     renderInput={renderInput}
     filterOptions={filterOptions}
@@ -45,16 +45,16 @@ const CompanySelect = ({ ...options }) => (
     autoHighlight
     autoComplete
     disableClearable
-    className='companySelect select'
+    className='tickerSelect select'
     {...options}
   />
 )
 
-CompanySelect.propTypes = {
+TickerSelect.propTypes = {
   options: PropTypes.shape({
     defaultValue: PropTypes.string,
     onChange:     PropTypes.func.required,
   }),
 }
 
-export default CompanySelect
+export default TickerSelect
