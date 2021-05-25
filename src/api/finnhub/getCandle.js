@@ -5,10 +5,11 @@ import { TICKERS_HASH } from 'stocks/src/conf/tickers'
 
 const { finnhub: { apiKey } } = config
 
-export const getOptions = ({ symbol: symb, interval, outputsize }) => {
-  const { type } = TICKERS_HASH[symb]
+export const getOptions = ({ symbol: symb, interval }) => {
+  const { type, binanceSymbol } = TICKERS_HASH[symb]
+
   const route = type == 'crypto' ? 'crypto' : 'stock'
-  const symbol = `${type === 'crypto' ? `BINANCE:` : ''}${symb}`
+  const symbol = type === 'crypto' ? `BINANCE:${binanceSymbol}` : symb
 
   return {
     baseURL: 'https://finnhub.io',

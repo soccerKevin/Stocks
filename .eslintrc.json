@@ -38,7 +38,7 @@
         "no-restricted-exports": ["error", { "restrictedNamedExports": [] }],
         "no-multiple-empty-lines": ["warn"],
         "operator-linebreak": ["warn", "before"],
-        "quotes": ["warn", "single", { "avoidEscape": true }],
+        "quotes": ["warn", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
         "react/prop-types": 0,
         "react/self-closing-comp": ["warn"],
         "react/jsx-tag-spacing": ["warn", { "beforeSelfClosing": "always" }],

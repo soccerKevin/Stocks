@@ -7,5 +7,5 @@ import * as finnhubGetCandle from './finnhub/getCandle'
 export const getCandles = {
   alpha:   alphaGetCandle,
   yahoo:   yahooGetCandle,
-  finnhub: finnhubGetCandle
+  finnhub: finnhubGetCandle,
 }
