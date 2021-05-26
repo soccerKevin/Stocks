@@ -14,8 +14,12 @@ const routes = [
       path:  '/mycharts',
       exact: true,
     },
-    pageOptions: {
-
+  },
+  {
+    Page:         pages.Cryptos,
+    routeOptions: {
+      path:  '/cryptos',
+      exact: true,
     },
   },
 ]

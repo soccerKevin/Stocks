@@ -30,8 +30,8 @@ export const CRYPTOS = [
     type:          'crypto',
   },
   {
-    symbol:        'DOGD',
-    binanceSymbol: 'DOG/USD',
+    symbol:        'DOGE',
+    binanceSymbol: 'DOGEUSD',
     name:          'Dogecoin',
     type:          'crypto',
   },
@@ -51,4 +51,7 @@ export const CRYPTO_SYMBOLS = CRYPTOS.map((crypto) => {
 })
 
 export const CRYPTO_HASH = cryptoHash
+
+export const BINANCE_SYMBOLS = CRYPTOS.map((crypto) => crypto.binanceSymbol)
+
 
