@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useQuery } from 'react-query'
 import axios from 'axios'
+import classNames from 'classnames'
 
 import { Box, Skeleton } from '@material-ui/core'
 import { ResponsiveContainer } from 'recharts'
@@ -25,13 +26,18 @@ const retry = (failureCount, error) => {
   return true
 }
 
-const Chart = ({ symbol: symb, interval: int }) => {
+const Chart = ({ symbol: symb, interval: int, resizeable, draggable }) => {
   const [symbol, setSymbol] = useState(symb)
   const [interval, setInterval] = useState(int)
   const { data, isLoading, isSuccess } = useQuery([symbol, { symbol, interval }], getData, { retry })
 
   return (
-    <Rnd className='chart' default={{ x: 10, y: 10, width: 730, height: 250 }}>
+    <Rnd
+      className={classNames(['chart', { ['immobile']: !draggable }])}
+      default={{ x: 10, y: 10, width: 730, height: 250 }}
+      enableResizing={resizeable}
+      disableDragging={!draggable}
+    >
       <Box className='header'>
         <h2 className='tickerName'>{TICKERS_HASH[symbol].name}</h2>
         <Box className='controls'>
@@ -59,13 +65,17 @@ const Chart = ({ symbol: symb, interval: int }) => {
 }
 
 Chart.propTypes = {
-  symbol:   PropTypes.string,
-  interval: PropTypes.string,
+  symbol:     PropTypes.string,
+  interval:   PropTypes.string,
+  resizeable: PropTypes.bool,
+  draggable:  PropTypes.bool,
 }
 
 Chart.defaultProps = {
-  symbol:   'GROW',
-  interval: '1min',
+  symbol:     'GROW',
+  interval:   '1min',
+  resizeable: true,
+  draggable:  true,
 }
 
 export default Chart

@@ -1,6 +1,12 @@
 .chart {
   border: 1px solid white;
   padding: 1rem;
+  user-select: none!important;
+
+  &.immobile {
+    position: static!important;
+    transform: none!important;
+  }
 
   .header {
     display: flex;

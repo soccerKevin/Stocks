@@ -9,8 +9,17 @@ const cryptos = CRYPTO_SYMBOLS.filter((crypto) => useableCryptos.includes(crypto
 
 const Cryptos = () => (
   <div id='cryptos'>
-    <ChartContainer>
-      { cryptos.map((symbol) => <Chart key={symbol} symbol={symbol} />) }
+    <ChartContainer direction={'column'}>
+      {
+        cryptos.map((symbol) => (
+          <Chart
+            key={symbol}
+            symbol={symbol}
+            draggable={false}
+            resizeable={false}
+          />
+        ))
+      }
     </ChartContainer>
   </div>
 )
