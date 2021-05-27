@@ -10,7 +10,7 @@ const Container = ({ children, direction }) => (
   </div>
 )
 
-Container.PropTypes = {
+Container.propTypes = {
   direction: PropTypes.oneOf(['column', 'row']),
 }
 

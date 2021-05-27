@@ -8,7 +8,7 @@ import { Box, Skeleton } from '@material-ui/core'
 import { ResponsiveContainer } from 'recharts'
 import { Rnd } from 'react-rnd'
 
-import LineChart from './lineChart'
+import CandleChart from './candleChart'
 
 import { TICKERS_HASH } from 'conf/tickers'
 import { TickerSelect, IntervalSelect } from 'components/selects'
@@ -29,7 +29,7 @@ const retry = (failureCount, error) => {
 const Chart = ({ symbol: symb, interval: int, resizeable, draggable }) => {
   const [symbol, setSymbol] = useState(symb)
   const [interval, setInterval] = useState(int)
-  const { data, isLoading, isSuccess } = useQuery([symbol, { symbol, interval }], getData, { retry })
+  const { data, isLoading, isError } = useQuery([symbol, { symbol, interval }], getData, { retry })
 
   return (
     <Rnd
@@ -54,9 +54,9 @@ const Chart = ({ symbol: symb, interval: int, resizeable, draggable }) => {
       <Box>
         <ResponsiveContainer width='100%' height='80%'>
           {
-            isLoading && isSuccess
+            isLoading || isError
               ? <Skeleton />
-              : <LineChart data={data} />
+              : <CandleChart data={data} />
           }
         </ResponsiveContainer>
       </Box>
