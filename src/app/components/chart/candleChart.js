@@ -22,6 +22,7 @@ const xFormatter = (val) => moment(new Date(val)).format('h:mmA')
 const tooltipFormatter = (val, _name, _props) => moment(val).format('h:mmA')
 
 const Candlestick = (props) => {
+  console.log('stick: ', props)
   const {
     fill,
     x,
@@ -37,7 +38,7 @@ const Candlestick = (props) => {
   const ratio = Math.abs(height / (open - close))
 
   return (
-    <g stroke={color} fill="none" strokeWidth="2">
+    <g stroke={color} fill={ isGrowing ? 'green' : null } strokeWidth="2">
       <path
         d={`
           M ${x},${y}
@@ -92,7 +93,8 @@ const Candlestick = (props) => {
 }
 
 const CandleChart = ({ data, width, height }) => {
-  const normalizedData = data.map((d) => ({ ...d, width: 1, openClose: [d.open, d.close], height: d.high - d.low }))
+  const normalizedData = data.map((d) => ({ ...d, width: .5, openClose: [d.open, d.close], height: d.high - d.low }))
+  console.log('width, height: ', width, height)
   return (
     <BarChart
       width={width}

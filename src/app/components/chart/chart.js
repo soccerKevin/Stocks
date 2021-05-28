@@ -34,7 +34,7 @@ const Chart = ({ symbol: symb, interval: int, resizeable, draggable }) => {
   return (
     <Rnd
       className={classNames(['chart', { ['immobile']: !draggable }])}
-      default={{ x: 10, y: 10, width: 730, height: 250 }}
+      default={{ x: 10, y: 10 }}
       enableResizing={resizeable}
       disableDragging={!draggable}
     >
