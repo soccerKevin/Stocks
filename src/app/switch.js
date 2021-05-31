@@ -1,5 +1,10 @@
 import React from 'react'
-import { Switch as ReactSwitch, Redirect, Route, useLocation } from 'react-router-dom'
+import {
+  Switch as ReactSwitch,
+  Redirect,
+  Route,
+  useLocation,
+} from 'react-router-dom'
 
 import routes from './routes'
 import { NotFound } from './pages'

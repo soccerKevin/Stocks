@@ -22,6 +22,13 @@ const routes = [
       exact: true,
     },
   },
+  {
+    Page:         pages.Spread,
+    routeOptions: {
+      path:  ['/spread/:symbol', '/spread'],
+      exact:  false,
+    },
+  },
 ]
 
 export default routes

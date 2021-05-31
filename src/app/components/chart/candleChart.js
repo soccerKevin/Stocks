@@ -22,7 +22,6 @@ const xFormatter = (val) => moment(new Date(val)).format('h:mmA')
 const tooltipFormatter = (val, _name, _props) => moment(val).format('h:mmA')
 
 const Candlestick = (props) => {
-  console.log('stick: ', props)
   const {
     fill,
     x,
@@ -94,7 +93,7 @@ const Candlestick = (props) => {
 
 const CandleChart = ({ data, width, height }) => {
   const normalizedData = data.map((d) => ({ ...d, width: .5, openClose: [d.open, d.close], height: d.high - d.low }))
-  console.log('width, height: ', width, height)
+
   return (
     <BarChart
       width={width}
