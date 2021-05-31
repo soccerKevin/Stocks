@@ -9,6 +9,10 @@ const paths = [
     label: 'My Charts',
     to:    '/myCharts',
   },
+  {
+    label: 'Cryptocurrency',
+    to:    '/cryptos',
+  },
 ]
 
 const Menu = () => {
