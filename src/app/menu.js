@@ -13,6 +13,14 @@ const paths = [
     label: 'Cryptocurrency',
     to:    '/cryptos',
   },
+  {
+    label: 'Spread',
+    to:    '/spread',
+  },
+  {
+    label: 'Invest',
+    to:    '/invest',
+  },
 ]
 
 const Menu = () => {

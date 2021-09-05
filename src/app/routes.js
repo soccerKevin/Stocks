@@ -23,6 +23,13 @@ const routes = [
     },
   },
   {
+    Page:         pages.Invest,
+    routeOptions: {
+      path:  ['/invest/:symbol', '/invest'],
+      exact: false,
+    },
+  },
+  {
     Page:         pages.Spread,
     routeOptions: {
       path:  ['/spread/:symbol', '/spread'],
