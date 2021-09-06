@@ -1,14 +1,15 @@
-import axios from 'axios'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { Helmet } from 'react-helmet-async'
-import { AtomChart } from 'components/chart'
 import { useParams } from 'react-router-dom'
+import axios from 'axios'
 import { getTicker, TICKERS_HASH } from 'conf/tickers'
 import { useRecoilState } from 'recoil'
 import { Box, Container } from '@material-ui/core'
+import moment from 'moment'
 
-import { Container as ChartContainer } from 'components/chart'
+import { Table } from 'components/table'
+import { AtomChart } from 'components/chart'
 import { TickerSelect, IntervalSelect, RangeSelect } from 'components/selects'
 
 import styles from './styles/invest.less'
@@ -57,6 +58,10 @@ const Header = () => {
   )
 }
 
+const formatDate = (val) => moment(new Date(val)).format('MMM D, YYYY')
+const formatNumber = (val) => val.toLocaleString()
+const formatCurrency = (val) => '$' + val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
 const Invest = () => {
   let { symbol: symb = 'BTCT' } = useParams()
   symb = symb.toUpperCase()
@@ -68,6 +73,19 @@ const Invest = () => {
   const { symbol, interval, range } = state;
   const { data, isLoading, isError } = useQuery([symbol, { symbol, interval, range }], getData, { retry })
 
+  let tableData;
+
+  if (data) {
+    tableData = data.map(({ timestamp, open, high, low, close, volume }) => ({
+      date:   formatDate(timestamp),
+      open:   formatCurrency(open),
+      high:   formatCurrency(high),
+      low:    formatCurrency(low),
+      close:  formatCurrency(close),
+      volume: formatNumber(close),
+    }))
+  }
+
   return (
     <div id='invest'>
       <Helmet>
@@ -77,7 +95,7 @@ const Invest = () => {
 
       <Container className='body'>
         <Header state={state} setState={setState} />
-        <ChartContainer direction='column' className='investChart'>
+        <Container className='investChart'>
           <AtomChart
             interval={'1day'}
             draggable={false}
@@ -86,7 +104,11 @@ const Invest = () => {
             ready={!(isLoading || isError)}
             data={data}
           />
-        </ChartContainer>
+        </Container>
+        <Table
+          data={tableData}
+          ready={!(isLoading || isError)}
+        />
       </Container>
     </div>
   )
