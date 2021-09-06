@@ -29,8 +29,10 @@ export const getOptions = ({ symbol: symb, interval, range }) => {
 export const normalize = (data) => {
   const { timestamp: timestamps, indicators } = data.chart.result[0]
   const { volume, open, close, high, low } = indicators.quote[0]
-  const result = timestamps.reduce((acc, timestamp, i) => (
-    [
+  const result = timestamps.reduce((acc, timestamp, i) => {
+    if (!volume[i] || !open[i] || !close[i] || !high[i], !low[i]) return acc;
+
+    return [
       ...acc,
       {
         timestamp: moment.unix(timestamp).format(),
@@ -40,7 +42,7 @@ export const normalize = (data) => {
         high:      high[i],
         low:       low[i],
       },
-    ]),
+    ]},
   []
   )
   return result

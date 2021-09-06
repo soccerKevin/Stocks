@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+import { useRecoilState } from 'recoil'
+import { chartAtom } from 'recoilStore/atoms'
 import PropTypes from 'prop-types'
 import { useQuery } from 'react-query'
 import axios from 'axios'
 import classNames from 'classnames'
+import { uniqueId } from 'lodash'
 
 import { Box, Skeleton } from '@material-ui/core'
 import { ResponsiveContainer } from 'recharts'
@@ -26,12 +29,15 @@ const retry = (failureCount, error) => {
   return true
 }
 
-const InvestChart = ({ symbol: symb, interval: int, range: ra, resizeable, draggable }) => {
-  const [symbol, setSymbol] = useState(symb)
-  const [interval, setInterval] = useState(int)
-  const [range, setRange] = useState(ra)
+const AtomChart = ({ symbol: symb, interval: int, range: ra, resizeable, draggable, atomKey }) => {
+  const key = `AtomChart_${atomKey}`
+  const [state, setState] = useRecoilState(chartAtom(key))
+  const { symbol, interval, range } = state;
   const { data, isLoading, isError } = useQuery([symbol, { symbol, interval, range }], getData, { retry })
 
+  console.log('symbol: ', symbol)
+  console.log('interval: ', interval)
+  console.log('range: ', range)
   return (
     <Rnd
       className={classNames(['chart', { ['immobile']: !draggable }])}
@@ -43,15 +49,15 @@ const InvestChart = ({ symbol: symb, interval: int, range: ra, resizeable, dragg
         <h2 className='tickerName'>{TICKERS_HASH[symbol].name}</h2>
         <Box className='controls'>
           <TickerSelect
-            onChange={(e, value) => setSymbol(value.symbol)}
+            onChange={(e, value) => setState({ ...state, symbol: value.symbol })}
             defaultValue={symb}
           />
           <IntervalSelect
-            onChange={(e, value) => setInterval(value)}
+            onChange={(e, value) => setState({ ...state, interval: value })}
             defaultValue={int}
           />
           <RangeSelect
-            onChange={(e, value) => setRange(value)}
+            onChange={(e, value) => setState({ ...state, range: value })}
             defaultValue={ra}
           />
         </Box>
@@ -69,15 +75,16 @@ const InvestChart = ({ symbol: symb, interval: int, range: ra, resizeable, dragg
   )
 }
 
-InvestChart.propTypes = {
+AtomChart.propTypes = {
   symbol:     PropTypes.string,
   interval:   PropTypes.string,
   range:      PropTypes.string,
   resizeable: PropTypes.bool,
   draggable:  PropTypes.bool,
+  atomKey:    PropTypes.string,
 }
 
-InvestChart.defaultProps = {
+AtomChart.defaultProps = {
   symbol:     'GROW',
   interval:   '1day',
   range:      '1year',
@@ -85,4 +92,4 @@ InvestChart.defaultProps = {
   draggable:  true,
 }
 
-export default InvestChart
+export default AtomChart

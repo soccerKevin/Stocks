@@ -21,7 +21,8 @@
         }
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks"
     ],
     "rules": {
         "comma-dangle": ["warn", {
@@ -46,6 +47,12 @@
         "react/prop-types": 0,
         "react/self-closing-comp": ["warn"],
         "react/jsx-tag-spacing": ["warn", { "beforeSelfClosing": "always" }],
-        "semi": ["warn", "never"]
+        "semi": ["warn", "never"],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": [
+          "warn", {
+            "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)"
+          }
+        ]
     }
 }

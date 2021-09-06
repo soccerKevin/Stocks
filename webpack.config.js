@@ -73,6 +73,7 @@ const config = {
       conf: '/src/conf',
       images: '/src/app/images',
       pages: '/src/app/pages',
+      recoilStore: '/src/app/recoilStore',
     },
   },
 };
