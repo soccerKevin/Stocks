@@ -15,7 +15,7 @@ const Invest = () => {
   symbol = symbol.toUpperCase()
   const company = getTicker(symbol)
 
-  const state = useRecoilValue(chartAtom(key))
+  const { data } = useRecoilValue(chartAtom(key))
 
   return (
     <div id='invest'>

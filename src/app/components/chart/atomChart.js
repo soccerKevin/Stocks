@@ -34,10 +34,8 @@ const AtomChart = ({ symbol: symb, interval: int, range: ra, resizeable, draggab
   const [state, setState] = useRecoilState(chartAtom(key))
   const { symbol, interval, range } = state;
   const { data, isLoading, isError } = useQuery([symbol, { symbol, interval, range }], getData, { retry })
+  if (!isLoading) setState({ ...state, data })
 
-  console.log('symbol: ', symbol)
-  console.log('interval: ', interval)
-  console.log('range: ', range)
   return (
     <Rnd
       className={classNames(['chart', { ['immobile']: !draggable }])}
