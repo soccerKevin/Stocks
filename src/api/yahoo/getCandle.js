@@ -6,7 +6,7 @@ import { TICKERS_HASH } from 'stocks/src/conf/tickers'
 
 const { yahoo: { apiKey, apiHost } } = config
 
-export const getOptions = ({ symbol: symb, interval, range }) => {
+export const getOptions = ({ symbol: symb, interval, range = '1day' }) => {
   const { type, yahoo } = TICKERS_HASH[symb]
   const symbol = type === 'crypto' ? yahoo : symb
 

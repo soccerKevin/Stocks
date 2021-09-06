@@ -12,26 +12,24 @@ import CandleChart from './candleChart'
 
 import './style/chart.less'
 
-const AtomChart = ({ data, resizeable, draggable, ready }) => {
-  return (
-    <Rnd
-      className={classNames(['chart', { ['immobile']: !draggable }])}
-      default={{ x: 10, y: 10 }}
-      enableResizing={resizeable}
-      disableDragging={!draggable}
-    >
-      <Box>
-        <ResponsiveContainer width='100%' height='80%'>
-          {
-            ready
-              ? <Skeleton />
-              : <CandleChart data={data} />
-          }
-        </ResponsiveContainer>
-      </Box>
-    </Rnd>
-  )
-}
+const AtomChart = ({ data, resizeable, draggable, ready, width, height }) => (
+  <Rnd
+    className={classNames(['chart', { ['immobile']: !draggable }])}
+    default={{ x: 10, y: 10, width, height }}
+    enableResizing={resizeable}
+    disableDragging={!draggable}
+  >
+    <Box>
+      <ResponsiveContainer width='100%' height='100%'>
+        {
+          ready
+            ? <CandleChart data={data} />
+            : <Skeleton />
+        }
+      </ResponsiveContainer>
+    </Box>
+  </Rnd>
+)
 
 AtomChart.propTypes = {
   resizeable: PropTypes.bool,
@@ -45,6 +43,8 @@ AtomChart.propTypes = {
     low:       PropTypes.number,
   })),
   ready:      PropTypes.bool,
+  width:      PropTypes.string,
+  height:     PropTypes.string,
 }
 
 AtomChart.defaultProps = {
@@ -52,6 +52,8 @@ AtomChart.defaultProps = {
   draggable:  true,
   ready:      true,
   data:       [],
+  width:      '1000px',
+  height:     '500px',
 }
 
 export default AtomChart

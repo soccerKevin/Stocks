@@ -4,14 +4,15 @@ import classNames from 'classnames'
 
 import './style/container.less'
 
-const Container = ({ children, direction }) => (
-  <div className={classNames(['chartContainer', direction])}>
+const Container = ({ children, direction, className }) => (
+  <div className={classNames(['chartContainer', direction, className])}>
     {children}
   </div>
 )
 
 Container.propTypes = {
   direction: PropTypes.oneOf(['column', 'row']),
+  className: PropTypes.string,
 }
 
 Container.defaultProps = {

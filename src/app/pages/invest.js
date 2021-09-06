@@ -5,10 +5,13 @@ import { Helmet } from 'react-helmet-async'
 import { AtomChart } from 'components/chart'
 import { useParams } from 'react-router-dom'
 import { getTicker, TICKERS_HASH } from 'conf/tickers'
-import { Container as ChartContainer } from 'components/chart'
 import { useRecoilState } from 'recoil'
-import { Box } from '@material-ui/core'
+import { Box, Container } from '@material-ui/core'
+
+import { Container as ChartContainer } from 'components/chart'
 import { TickerSelect, IntervalSelect, RangeSelect } from 'components/selects'
+
+import styles from './styles/invest.less'
 
 const atomKey = 'invest'
 const key = `AtomChart_${atomKey}`
@@ -34,7 +37,7 @@ const Header = () => {
   const company = getTicker(symbol)
 
   return (
-    <Box className='header'>
+    <Container className='header'>
       <h2 className='tickerName'>{company.name}</h2>
       <Box className='controls'>
         <TickerSelect
@@ -50,7 +53,7 @@ const Header = () => {
           defaultValue={range}
         />
       </Box>
-    </Box>
+    </Container>
   )
 }
 
@@ -61,6 +64,7 @@ const Invest = () => {
   if (!chartAtom) chartAtom = atomFamily({ key: 'AtomChart', default: { symbol: symb, interval: '1day', range: '1year' } })
 
   const [state, setState] = useRecoilState(chartAtom(key))
+
   const { symbol, interval, range } = state;
   const { data, isLoading, isError } = useQuery([symbol, { symbol, interval, range }], getData, { retry })
 
@@ -71,17 +75,19 @@ const Invest = () => {
         <title>Stock Investment</title>
       </Helmet>
 
-      <Header state={state} setState={setState} />
-      <ChartContainer direction={'column'}>
-        <AtomChart
-          interval={'1day'}
-          draggable={false}
-          resizeable={false}
-          atomKey={atomKey}
-          ready={!(isLoading || isError)}
-          data={data}
-        />
-      </ChartContainer>
+      <Container className='body'>
+        <Header state={state} setState={setState} />
+        <ChartContainer direction='column' className='investChart'>
+          <AtomChart
+            interval={'1day'}
+            draggable={false}
+            resizeable={false}
+            atomKey={atomKey}
+            ready={!(isLoading || isError)}
+            data={data}
+          />
+        </ChartContainer>
+      </Container>
     </div>
   )
 }
