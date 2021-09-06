@@ -83,7 +83,7 @@ const Invest = () => {
       low:    formatCurrency(low),
       close:  formatCurrency(close),
       volume: formatNumber(close),
-    }))
+    })).reverse()
   }
 
   return (

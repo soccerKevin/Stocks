@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Virtuoso } from 'react-virtuoso'
 
 import {
   Table as MaterialTable,
@@ -12,6 +13,18 @@ import {
 
 import styles from './styles/table.less'
 
+const Row = ({ row, key, order }) => (
+  <TableRow key={`row_${key}`}>
+    {
+      order.map((cellName) => (
+        <TableCell className={`cell ${cellName}`} key={`data_${cellName}_${key}`}>
+          {row[cellName]}
+        </TableCell>
+      ))
+    }
+  </TableRow>
+)
+
 const Table = ({ data, dataOrder, headers, ready }) => {
   if (!ready) return <Skeleton />
 
@@ -20,28 +33,19 @@ const Table = ({ data, dataOrder, headers, ready }) => {
   const order = dataOrder ? dataOrder : dataKeys;
 
   return (
-    <MaterialTable stickyHeader className='table'>
+    <div className='table'>
       <TableHead className='tableHeader'>
         <TableRow>
-          {labels.map((label, i) => <TableCell className='cell' key={`header_${label}_${i}`}>{label}</TableCell>)}
+          {labels.map((label, i) => <TableCell className={`cell ${label}`} key={`header_${label}_${i}`}>{label}</TableCell>)}
         </TableRow>
       </TableHead>
-      <TableBody>
-        {
-          data.map((row, ri) => (
-            <TableRow key={`row_${ri}`}>
-              {
-                order.map((cellName, ci) => (
-                  <TableCell className='cell' key={`data_${cellName}_${ri}`}>
-                    {row[cellName]}
-                  </TableCell>
-                ))
-              }
-            </TableRow>
-          ))
-        }
-      </TableBody>
-    </MaterialTable>
+      <Virtuoso
+        style={{ height: '400px', width: '900px' }}
+        totalCount={data.length}
+        data={data}
+        itemContent={(i, row) => <Row order={order} key={i} row={row}/>}
+      />
+    </div>
   )
 }
 
