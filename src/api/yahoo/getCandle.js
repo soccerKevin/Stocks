@@ -1,11 +1,12 @@
 import moment from 'moment'
 import config from 'stocks/config'
 import { INTERVALS_HASH } from 'stocks/src/conf/intervals'
+import { RANGES_HASH } from 'stocks/src/conf/ranges'
 import { TICKERS_HASH } from 'stocks/src/conf/tickers'
 
 const { yahoo: { apiKey, apiHost } } = config
 
-export const getOptions = ({ symbol: symb, interval }) => {
+export const getOptions = ({ symbol: symb, interval, range }) => {
   const { type, yahoo } = TICKERS_HASH[symb]
   const symbol = type === 'crypto' ? yahoo : symb
 
@@ -15,7 +16,7 @@ export const getOptions = ({ symbol: symb, interval }) => {
     params:  {
       interval: INTERVALS_HASH[interval].yahoo,
       symbol,
-      range:    '1d',
+      range:    RANGES_HASH[range].yahoo,
       region:   'US',
     },
     headers: {
