@@ -1,6 +1,6 @@
 import Debug from 'debug'
 import express from 'express'
-import getCandle from './getCandle'
+import routes from './routes'
 
 const debug = Debug('stocks:api:router')
 
@@ -11,7 +11,8 @@ const handleError = (error, req, res, _next) => {
   res.status(500).json({ error: error.message })
 }
 
-router.get('/stock/:symbol/candle', getCandle)
+router.get('/stock/:symbol/candle', routes.getCandle)
+route.get('/stock/:symbol/stats', routes.getStats)
 
 router.use(handleError)
 

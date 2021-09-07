@@ -21,8 +21,13 @@ import { atomFamily } from 'recoil';
 
 let chartAtom;
 
-const getData = async ({ queryKey: [_key, { symbol, ...options }] }) => (
+const getCandle = async ({ queryKey: [_key, { symbol, ...options }] }) => (
   axios.get(`/api/stock/${symbol}/candle`, { params: options })
+  .then((res) => res.data)
+)
+
+const getStats = async ({ queryKey: [_key, { symbol }] }) => (
+  axios.get(`/api/stock/${symbol}/stats`)
   .then((res) => res.data)
 )
 
@@ -71,12 +76,24 @@ const Invest = () => {
   const [state, setState] = useRecoilState(chartAtom(key))
 
   const { symbol, interval, range } = state;
-  const { data, isLoading, isError } = useQuery([symbol, { symbol, interval, range }], getData, { retry })
+  const {
+    data: candleData,
+    isLoading: candleLoading,
+    isError: candleError
+  } = useQuery([`candle_${symbol}`, { symbol, interval, range }], getCandle, { retry })
+
+  const {
+    data: stats,
+    isLoading: statsLoading,
+    isError: statsError
+  } = useQuery([`stats_${symbol}`, { symbol }], getStats, { retry })
+
+  console.log('stats: ', stats)
 
   let tableData;
 
-  if (data) {
-    tableData = data.map(({ timestamp, open, high, low, close, volume }) => ({
+  if (candleData) {
+    tableData = candleData.map(({ timestamp, open, high, low, close, volume }) => ({
       date:   formatDate(timestamp),
       open:   formatCurrency(open),
       high:   formatCurrency(high),
@@ -101,13 +118,13 @@ const Invest = () => {
             draggable={false}
             resizeable={false}
             atomKey={atomKey}
-            ready={!(isLoading || isError)}
-            data={data}
+            ready={!(candleLoading || candleError)}
+            data={candleData}
           />
         </Container>
         <Table
           data={tableData}
-          ready={!(isLoading || isError)}
+          ready={!(candleLoading || candleError)}
         />
       </Container>
     </div>

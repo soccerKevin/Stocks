@@ -1,11 +1,7 @@
-export { getCandle } from './getCandle'
+import { getCandle } from 'stocks/src/api/routes/getCandle'
+import { getStats } from 'stocks/src/api/routes/getStats'
 
-import * as alphaGetCandle from './alpha/getCandle'
-import * as yahooGetCandle from './yahoo/getCandle'
-import * as finnhubGetCandle from './finnhub/getCandle'
-
-export const getCandles = {
-  alpha:   alphaGetCandle,
-  yahoo:   yahooGetCandle,
-  finnhub: finnhubGetCandle,
+export default routes = {
+  getCandle,
+  getStats,
 }
