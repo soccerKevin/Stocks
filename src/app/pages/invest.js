@@ -51,16 +51,36 @@ const Stats = ({ symbol }) => {
   } = data
 
   return (
-    <Container>
-      <Card>
-        <h4>Current Price</h4>
-        {currentPrice}
-      </Card>
-      <Card>
-        <h4>Market Cap</h4>
-        {marketCap}
-      </Card>
-    </Container>
+    <div className='stats'>
+      <Container>
+        <Card className='card'>
+          <h4>Current Price</h4>
+          {currentPrice}
+        </Card>
+        <Card className='card'>
+          <h4>Change</h4>
+          {marketChange}
+        </Card>
+        <Card className='card'>
+          <h4>% Change</h4>
+          {percentChange}
+        </Card>
+      </Container>
+      <Container>
+        <Card className='card'>
+          <h4>Market Cap</h4>
+          {marketCap}
+        </Card>
+        <Card className='card'>
+          <h4>PEG Ratio</h4>
+          {pegRatio}
+        </Card>
+        <Card className='card'>
+          <h4>Beta</h4>
+          {beta}
+        </Card>
+      </Container>
+    </div>
   )
 }
 
