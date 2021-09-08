@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { getTicker, TICKERS_HASH } from 'conf/tickers'
 import { useRecoilState } from 'recoil'
-import { Box, Container } from '@material-ui/core'
+import { Box, Card, Container } from '@material-ui/core'
 import moment from 'moment'
 
 import { Table } from 'components/table'
@@ -37,6 +37,33 @@ const retry = (failureCount, error) => {
   return true
 }
 
+const Stats = ({ symbol }) => {
+  const { data, isLoading, isError } = useQuery([`stats_${symbol}`, { symbol }], getStats, { retry })
+  if (isLoading || isError) return null
+
+  const {
+    currentPrice,
+    marketChange,
+    percentChange,
+    beta,
+    pegRatio,
+    marketCap,
+  } = data
+
+  return (
+    <Container>
+      <Card>
+        <h4>Current Price</h4>
+        {currentPrice}
+      </Card>
+      <Card>
+        <h4>Market Cap</h4>
+        {marketCap}
+      </Card>
+    </Container>
+  )
+}
+
 const Header = () => {
   const [state, setState] = useRecoilState(chartAtom(key))
   const { symbol, interval, range } = state
@@ -44,21 +71,24 @@ const Header = () => {
 
   return (
     <Container className='header'>
-      <h2 className='tickerName'>{company.name}</h2>
-      <Box className='controls'>
-        <TickerSelect
-          onChange={(e, value) => setState({ ...state, symbol: value.symbol })}
-          defaultValue={symbol}
-        />
-        <IntervalSelect
-          onChange={(e, value) => setState({ ...state, interval: value })}
-          defaultValue={interval}
-        />
-        <RangeSelect
-          onChange={(e, value) => setState({ ...state, range: value })}
-          defaultValue={range}
-        />
-      </Box>
+      <h1 className='tickerName'>{company.name}</h1>
+      <Container>
+        <Stats symbol={symbol} />
+        <Box className='controls'>
+          <TickerSelect
+            onChange={(e, value) => setState({ ...state, symbol: value.symbol })}
+            defaultValue={symbol}
+          />
+          <IntervalSelect
+            onChange={(e, value) => setState({ ...state, interval: value })}
+            defaultValue={interval}
+          />
+          <RangeSelect
+            onChange={(e, value) => setState({ ...state, range: value })}
+            defaultValue={range}
+          />
+        </Box>
+      </Container>
     </Container>
   )
 }
@@ -68,7 +98,7 @@ const formatNumber = (val) => val.toLocaleString()
 const formatCurrency = (val) => '$' + val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
 const Invest = () => {
-  let { symbol: symb = 'BTCT' } = useParams()
+  let { symbol: symb = 'MSFT' } = useParams()
   symb = symb.toUpperCase()
 
   if (!chartAtom) chartAtom = atomFamily({ key: 'AtomChart', default: { symbol: symb, interval: '1day', range: '1year' } })
@@ -78,17 +108,9 @@ const Invest = () => {
   const { symbol, interval, range } = state;
   const {
     data: candleData,
-    isLoading: candleLoading,
-    isError: candleError
+    isLoading,
+    isError
   } = useQuery([`candle_${symbol}`, { symbol, interval, range }], getCandle, { retry })
-
-  const {
-    data: stats,
-    isLoading: statsLoading,
-    isError: statsError
-  } = useQuery([`stats_${symbol}`, { symbol }], getStats, { retry })
-
-  console.log('stats: ', stats)
 
   let tableData;
 
@@ -111,20 +133,20 @@ const Invest = () => {
       </Helmet>
 
       <Container className='body'>
-        <Header state={state} setState={setState} />
+        <Header/>
         <Container className='investChart'>
           <AtomChart
             interval={'1day'}
             draggable={false}
             resizeable={false}
             atomKey={atomKey}
-            ready={!(candleLoading || candleError)}
+            ready={!(isLoading || isError)}
             data={candleData}
           />
         </Container>
         <Table
           data={tableData}
-          ready={!(candleLoading || candleError)}
+          ready={!(isLoading || isError)}
         />
       </Container>
     </div>

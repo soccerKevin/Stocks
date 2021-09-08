@@ -13,17 +13,23 @@ import {
 
 import styles from './styles/table.less'
 
-const Row = ({ row, key, order }) => (
-  <TableRow key={`row_${key}`}>
+const Row = ({ row, index, order }) => (
+  <TableRow key={`row_${index}`}>
     {
       order.map((cellName) => (
-        <TableCell className={`cell ${cellName}`} key={`data_${cellName}_${key}`}>
+        <TableCell className={`cell ${cellName}`} key={`data_${cellName}_${index}`}>
           {row[cellName]}
         </TableCell>
       ))
     }
   </TableRow>
 )
+
+Row.propTypes = {
+  row:   PropTypes.object,
+  index: PropTypes.number,
+  order: PropTypes.arrayOf(PropTypes.string),
+}
 
 const Table = ({ data, dataOrder, headers, ready }) => {
   if (!ready) return <Skeleton />
@@ -33,7 +39,7 @@ const Table = ({ data, dataOrder, headers, ready }) => {
   const order = dataOrder ? dataOrder : dataKeys;
 
   return (
-    <div className='table'>
+    <MaterialTable className='table'>
       <TableHead className='tableHeader'>
         <TableRow>
           {labels.map((label, i) => <TableCell className={`cell ${label}`} key={`header_${label}_${i}`}>{label}</TableCell>)}
@@ -43,9 +49,9 @@ const Table = ({ data, dataOrder, headers, ready }) => {
         style={{ height: '400px', width: '900px' }}
         totalCount={data.length}
         data={data}
-        itemContent={(i, row) => <Row order={order} key={i} row={row}/>}
+        itemContent={(i, row) => <Row order={order} index={i} row={row}/>}
       />
-    </div>
+    </MaterialTable>
   )
 }
 

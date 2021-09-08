@@ -12,7 +12,7 @@ const handleError = (error, req, res, _next) => {
 }
 
 router.get('/stock/:symbol/candle', routes.getCandle)
-route.get('/stock/:symbol/stats', routes.getStats)
+router.get('/stock/:symbol/stats', routes.getStats)
 
 router.use(handleError)
 

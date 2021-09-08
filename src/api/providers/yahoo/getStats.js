@@ -12,11 +12,8 @@ export const getOptions = ({ symbol: symb }) => {
 
   return {
     baseURL: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com',
-    url:     '/stock/v2/get-statistics',
-    params:  {
-      symbol,
-      region:   'US',
-    },
+    url:     '/stock/v3/get-statistics',
+    params:  { symbol },
     headers: {
       'x-rapidapi-key':  apiKey,
       'x-rapidapi-host': apiHost,
@@ -25,7 +22,41 @@ export const getOptions = ({ symbol: symb }) => {
 }
 
 export const normalize = (data) => {
-  console.log('stats data: ', data)
-  const result = data
-  return result
+  const {
+    financialData: {
+      currentPrice: {
+        raw: currentPrice,
+      },
+    },
+    price: {
+      regularMarketChange: {
+        raw: marketChange,
+      },
+      regularMarketChangePercent: {
+        raw: percentChange,
+      },
+    },
+    defaultKeyStatistics: {
+      beta: {
+        raw: beta,
+      },
+      pegRatio: {
+        raw: pegRatio,
+      },
+    },
+    summaryDetail: {
+      marketCap: {
+        raw: marketCap,
+      }
+    },
+  } = data
+
+  return {
+    currentPrice,
+    marketChange,
+    percentChange,
+    beta,
+    pegRatio,
+    marketCap,
+  }
 }

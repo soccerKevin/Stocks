@@ -1,5 +1,4 @@
 import Debug from 'debug'
-
 import { getCandle as apiGetCandle } from 'stocks/src/api'
 
 const debug = Debug('stocks:api')

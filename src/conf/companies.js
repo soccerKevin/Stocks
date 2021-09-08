@@ -32440,7 +32440,7 @@ export const COMPANIES = [
 const companyHash = {}
 
 export const COMPANY_SYMBOLS = COMPANIES.map((company) => {
-  companyHash[company.symbol] = company.symbol
+  companyHash[company.symbol] = company
   return company.symbol
 })
 
