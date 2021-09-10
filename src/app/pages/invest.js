@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import { Helmet } from 'react-helmet-async'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import { getTicker, TICKERS_HASH } from 'conf/tickers'
+import { getTicker } from 'conf/tickers'
 import { useRecoilState } from 'recoil'
 import { Box, Card, Container } from '@material-ui/core'
 import moment from 'moment'
@@ -17,9 +17,9 @@ import styles from './styles/invest.less'
 const atomKey = 'invest'
 const key = `AtomChart_${atomKey}`
 
-import { atomFamily } from 'recoil';
+import { atomFamily } from 'recoil'
 
-let chartAtom;
+let chartAtom
 
 const getCandle = async ({ queryKey: [_key, { symbol, ...options }] }) => (
   axios.get(`/api/stock/${symbol}/candle`, { params: options })
@@ -65,8 +65,6 @@ const Stats = ({ symbol }) => {
           <h4>% Change</h4>
           {percentChange}
         </Card>
-      </Container>
-      <Container>
         <Card className='card'>
           <h4>Market Cap</h4>
           {marketCap}
@@ -91,9 +89,8 @@ const Header = () => {
 
   return (
     <Container className='header'>
-      <h1 className='tickerName'>{company.name}</h1>
-      <Container>
-        <Stats symbol={symbol} />
+      <Container className='container'>
+        <h1 className='tickerName'>{company.name}</h1>
         <Box className='controls'>
           <TickerSelect
             onChange={(e, value) => setState({ ...state, symbol: value.symbol })}
@@ -109,13 +106,14 @@ const Header = () => {
           />
         </Box>
       </Container>
+      <Stats symbol={symbol} />
     </Container>
   )
 }
 
 const formatDate = (val) => moment(new Date(val)).format('MMM D, YYYY')
 const formatNumber = (val) => val.toLocaleString()
-const formatCurrency = (val) => '$' + val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+const formatCurrency = (val) => '$' + val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
 const Invest = () => {
   let { symbol: symb = 'MSFT' } = useParams()
@@ -125,14 +123,14 @@ const Invest = () => {
 
   const [state, setState] = useRecoilState(chartAtom(key))
 
-  const { symbol, interval, range } = state;
+  const { symbol, interval, range } = state
   const {
     data: candleData,
     isLoading,
-    isError
+    isError,
   } = useQuery([`candle_${symbol}`, { symbol, interval, range }], getCandle, { retry })
 
-  let tableData;
+  let tableData
 
   if (candleData) {
     tableData = candleData.map(({ timestamp, open, high, low, close, volume }) => ({
@@ -141,7 +139,7 @@ const Invest = () => {
       high:   formatCurrency(high),
       low:    formatCurrency(low),
       close:  formatCurrency(close),
-      volume: formatNumber(close),
+      volume: formatNumber(volume),
     })).reverse()
   }
 
@@ -153,7 +151,7 @@ const Invest = () => {
       </Helmet>
 
       <Container className='body'>
-        <Header/>
+        <Header />
         <Container className='investChart'>
           <AtomChart
             interval={'1day'}

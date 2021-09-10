@@ -45,6 +45,7 @@ const Table = ({ data, dataOrder, headers, ready }) => {
           {labels.map((label, i) => <TableCell className={`cell ${label}`} key={`header_${label}_${i}`}>{label}</TableCell>)}
         </TableRow>
       </TableHead>
+
       <Virtuoso
         style={{ height: '400px', width: '900px' }}
         totalCount={data.length}
