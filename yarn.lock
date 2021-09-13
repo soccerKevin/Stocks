@@ -5790,6 +5790,11 @@ react-smooth@^2.0.0:
     raf "^3.4.0"
     react-transition-group "2.9.0"
 
+react-table-scrollbar@^0.1.11:
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/react-table-scrollbar/-/react-table-scrollbar-0.1.11.tgz#e09887973e54805a478d222d388059a126c99d64"
+  integrity sha512-jfcMyQba5+8n7RQVGx76gw4zWFjyKvfzmMQdq46115Yjl2mBZJkS3KrRdipKZrOR4NC9IbtJ67tmjbfSJInw+w==
+
 react-transition-group@2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.9.0.tgz#df9cdb025796211151a436c69a8f3b97b5b07c8d"

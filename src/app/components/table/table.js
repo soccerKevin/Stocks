@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Virtuoso } from 'react-virtuoso'
+import TableScrollbar from 'react-table-scrollbar';
 
 import {
   Table as MaterialTable,
@@ -8,6 +8,7 @@ import {
   TableHead,
   TableRow,
   TableCell,
+  TableContainer,
   Skeleton,
 } from '@material-ui/core'
 
@@ -34,25 +35,33 @@ Row.propTypes = {
 const Table = ({ data, dataOrder, headers, ready }) => {
   if (!ready) return <Skeleton />
 
-  const dataKeys = Object.keys(data[0]);
-  const labels = headers ? headers : dataKeys;
-  const order = dataOrder ? dataOrder : dataKeys;
+  const dataKeys = Object.keys(data[0])
+  const labels = headers ? headers : dataKeys
+  const order = dataOrder ? dataOrder : dataKeys
 
   return (
-    <MaterialTable className='table'>
-      <TableHead className='tableHeader'>
-        <TableRow>
-          {labels.map((label, i) => <TableCell className={`cell ${label}`} key={`header_${label}_${i}`}>{label}</TableCell>)}
-        </TableRow>
-      </TableHead>
-
-      <Virtuoso
-        style={{ height: '400px', width: '900px' }}
-        totalCount={data.length}
-        data={data}
-        itemContent={(i, row) => <Row order={order} index={i} row={row}/>}
-      />
-    </MaterialTable>
+    <TableContainer>
+      <MaterialTable className='table'>
+        <TableHead className='tableHeader'>
+          <TableRow>
+            {
+              labels.map((label, i) => <TableCell className={`cell ${label}`} key={`header_${label}_${i}`}>{label}</TableCell>)
+            }
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {
+            data.map((row, ri) => (
+              <TableRow key={`row_${ri}`}>
+                {
+                  order.map((key, ci) => <TableCell key={`cell_${ri}_${ci}`}>{row[key]}</TableCell>)
+                }
+              </TableRow>
+            ))
+          }
+        </TableBody>
+      </MaterialTable>
+    </TableContainer>
   )
 }
 
