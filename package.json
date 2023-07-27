@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "DEBUG='stocks*' NODE_PATH='.' node --experimental-specifier-resolution=node src/server/index.js",
     "watch": "webpack --watch",
-    "start": "NODE_OPTIONS='--experimental-specifier-resolution=node' webpack serve",
+    "start": "NODE_OPTIONS='--experimental-specifier-resolution=node --openssl-legacy-provider' webpack serve",
     "build": "webpack",
     "alpha": "node src/api/alpha/index.js"
   },

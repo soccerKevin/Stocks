@@ -1,0 +1,18 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.1.0
+jobs:
+  build:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          name: Install Packages
+          command: yarn install --frozen-lockfile
+      - run:
+          name: Start Server
+          command: yarn run start
+
+
