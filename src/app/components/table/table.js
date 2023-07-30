@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TableScrollbar from 'react-table-scrollbar';
 
 import {
   Table as MaterialTable,
@@ -71,4 +70,4 @@ Table.propTypes = {
   headers:   PropTypes.arrayOf(PropTypes.string),
 }
 
-export default Table;
+export default Table

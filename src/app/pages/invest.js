@@ -121,7 +121,7 @@ const Invest = () => {
 
   if (!chartAtom) chartAtom = atomFamily({ key: 'AtomChart', default: { symbol: symb, interval: '1day', range: '1year' } })
 
-  const [state, setState] = useRecoilState(chartAtom(key))
+  const [state] = useRecoilState(chartAtom(key))
 
   const { symbol, interval, range } = state
   const {

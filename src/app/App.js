@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot } from 'recoil'
 
 import { StyledEngineProvider } from '@material-ui/core'
 
