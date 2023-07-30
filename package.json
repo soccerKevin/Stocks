@@ -10,7 +10,7 @@
     "watch": "webpack --watch",
     "start": "NODE_OPTIONS='--experimental-specifier-resolution=node --openssl-legacy-provider' webpack serve",
     "lint": "yarn run eslint",
-    "build": "webpack",
+    "build": "NODE_OPTIONS='--openssl-legacy-provider' webpack",
     "alpha": "node src/api/alpha/index.js"
   },
   "exports": {

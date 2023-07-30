@@ -1,5 +1,10 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ESLintPlugin from 'eslint-webpack-plugin'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const config = {
   devtool: 'inline-source-map',
@@ -49,7 +54,7 @@ const config = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: '/public',
+    path: path.resolve(__dirname, 'public'),
     clean: true,
     publicPath: '/',
   },

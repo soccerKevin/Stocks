@@ -12,7 +12,7 @@ jobs:
           name: Install Packages
           command: yarn install --frozen-lockfile
       - run:
-          name: Start Server
-          command: yarn run start
+          name: Build
+          command: yarn build
 
 
