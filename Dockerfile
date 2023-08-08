@@ -1,8 +1,8 @@
-FROM node:16.0.0
-WORKDIR /src
-COPY package.json ./
+FROM node:18.7.0
+WORKDIR /src/app
+COPY package*.json ./
 COPY yarn.lock ./
 COPY /src /src
 RUN yarn install
 EXPOSE 3000
-CMD ["yarn", "run", "dev"]
+RUN yarn run start

@@ -9,6 +9,7 @@
     "dev": "DEBUG='stocks*' NODE_PATH='.' node --experimental-specifier-resolution=node src/server/index.js",
     "watch": "webpack --watch",
     "start": "NODE_OPTIONS='--experimental-specifier-resolution=node --openssl-legacy-provider' webpack serve",
+    "start:prod": "NODE_ENV=production NODE_OPTIONS='--experimental-specifier-resolution=node --openssl-legacy-provider' webpack serve",
     "lint": "yarn run eslint",
     "build": "NODE_OPTIONS='--openssl-legacy-provider' webpack",
     "alpha": "node src/api/alpha/index.js"
