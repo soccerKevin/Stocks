@@ -1,6 +1,10 @@
 version: 2.1
 orbs:
   node: circleci/node@5.1.0
+  aws-code-deploy: circleci/aws-code-deploy@3.0.0
+  docker: circleci/docker@2.2.0
+# environment:
+#   COMMIT_SHA: echo "<< pipeline.git.base_revision >>" 
 jobs:
   build:
     executor: node/default
@@ -8,11 +12,25 @@ jobs:
       - checkout
       - node/install-packages:
           pkg-manager: yarn
-      - run:
-          name: Install Packages
-          command: yarn install --frozen-lockfile
-      - run:
-          name: Build
-          command: yarn build
 
+  build_docker:
+    executor: docker/docker
+    steps:
+      - run: echo $DOCKER_PASSWORD | docker login -u ${DOCKER_USERNAME} --password-stdin
+      - setup_remote_docker
+      - checkout
+      # - docker/check
+      - docker/build:
+          # image: stocks/${COMMIT_SHA}
+          image: soccerkevin/stocks
 
+      # - docker/push:
+      #     digest-path: /tmp/digest.txt
+      #     # image: stocks/${COMMIT_SHA}
+      #     image: stocks/orbs-test
+
+workflows:
+  commit:
+    jobs:
+      - build
+      - build_docker
