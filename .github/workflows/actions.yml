@@ -1,2 +1,22 @@
-name: stocks
-run-name: Building ${{ github.sha }}
+name: Test_Build
+run-name: Building ${{ github.sha }} on ${{ github.base_ref }}
+on: [ push ]
+jobs: 
+  Tests:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: soccerKevin/Stocks
+          ref: ${{ github.base_ref }}
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.15.0'
+      - run: npm install -g yarn
+      - run: yarn install
+      - run: yarn run test
