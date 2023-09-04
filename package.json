@@ -12,7 +12,7 @@
     "start:prod": "NODE_ENV=production NODE_OPTIONS='--experimental-specifier-resolution=node --openssl-legacy-provider' webpack serve",
     "lint": "yarn run eslint",
     "build": "NODE_OPTIONS='--openssl-legacy-provider' webpack",
-    "build:prod": "NODE_ENV=production webpack",
+    "build:prod": "NODE_OPTIONS=--openssl-legacy-provider && NODE_ENV=production webpack -p",
     "alpha": "node src/api/alpha/index.js"
   },
   "exports": {
@@ -60,7 +60,8 @@
     "style-loader": "^2.0.0",
     "webpack": "^5.36.0",
     "webpack-dev-middleware": "^4.1.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.9.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.13.15",
