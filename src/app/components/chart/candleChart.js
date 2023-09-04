@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import moment from 'moment'
 import { isNumber } from 'lodash'
 
@@ -23,7 +22,6 @@ const tooltipFormatter = (val, _name, _props) => moment(val).format('h:mmA')
 
 const Candlestick = (props) => {
   const {
-    fill,
     x,
     y,
     width,
