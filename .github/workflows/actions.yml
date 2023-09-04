@@ -1,0 +1,2 @@
+name: stocks
+run-name: Building ${{ github.sha }}
