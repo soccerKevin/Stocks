@@ -1,11 +1,10 @@
 version: '3.8'
 services:
-
-  app:
-    image: node:16.15.0
-    container_name: express
-    working_dir: /app
+  server:
     build: .
+    image: node:16.15.0
+    container_name: server
+    working_dir: /app
     ports:
       - 3000:3000
     volumes:
