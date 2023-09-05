@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+
+  app:
+    image: node:16.15.0
+    container_name: express
+    working_dir: /app
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    command: yarn run start
