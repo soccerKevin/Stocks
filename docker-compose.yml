@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   server:
-    # container_name: server
+    container_name: stocks-server
     image: node:16.15.0
     working_dir: /app
     ports:
