@@ -8,7 +8,6 @@
     "test": "jest",
     "dev": "DEBUG='stocks*' NODE_PATH='.' node --experimental-specifier-resolution=node src/server/index.js",
     "watch": "webpack --watch",
-    "start": "NODE_OPTIONS='--experimental-specifier-resolution=node' webpack serve",
     "build": "webpack",
     "alpha": "node src/api/alpha/index.js"
   },
@@ -64,6 +63,6 @@
     "eslint-plugin-react": "^7.23.2",
     "eslint-webpack-plugin": "^2.5.4",
     "file-loader": "^6.2.0",
-    "webpack-cli": "^4.6.0"
+    "webpack-cli": "^5.1.4"
   }
 }

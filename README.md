@@ -9,4 +9,4 @@ View Stock Candles from alpha, finnhub and yahoo, including cryptocurrencies.
 
 ### Running
 	- Dev
-		- yarn run start
+		- yarn run dev
