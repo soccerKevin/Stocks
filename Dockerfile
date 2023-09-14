@@ -5,4 +5,4 @@ RUN npm install yarn
 RUN yarn install
 COPY . .
 EXPOSE 3000
-RUN yarn run dev
+# RUN yarn run dev
