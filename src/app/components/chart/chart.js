@@ -27,6 +27,9 @@ const retry = (failureCount, error) => {
 }
 
 const Chart = ({ symbol: symb, interval: int, resizeable, draggable }) => {
+  console.log('here')
+  console.log('symb: ', symb)
+  console.log('interval: ', interval)
   const [symbol, setSymbol] = useState(symb)
   const [interval, setInterval] = useState(int)
   const { data, isLoading, isError } = useQuery([symbol, { symbol, interval }], getData, { retry })
