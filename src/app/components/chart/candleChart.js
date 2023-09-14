@@ -22,6 +22,7 @@ const tooltipFormatter = (val, _name, _props) => moment(val).format('h:mmA')
 
 const Candlestick = (props) => {
   const {
+    fill,
     x,
     y,
     width,
@@ -35,7 +36,7 @@ const Candlestick = (props) => {
   const ratio = Math.abs(height / (open - close))
 
   return (
-    <g stroke={color} fill={ isGrowing ? 'green' : null } strokeWidth="2">
+    <g stroke={color} fill={color} strokeWidth="2">
       <path
         d={`
           M ${x},${y}
@@ -91,7 +92,6 @@ const Candlestick = (props) => {
 
 const CandleChart = ({ data, width, height }) => {
   const normalizedData = data.map((d) => ({ ...d, width: .5, openClose: [d.open, d.close], height: d.high - d.low }))
-
   return (
     <BarChart
       width={width}
@@ -117,9 +117,9 @@ const CandleChart = ({ data, width, height }) => {
         // label={{ position: 'top' }}
       >
         {
-          normalizedData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={'red'} />
-          ))
+          normalizedData.map((entry, index) => {
+            return <Cell key={`cell-${index}`} fill={'red'} />
+          })
         }
       </Bar>
       <Tooltip

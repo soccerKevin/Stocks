@@ -16,6 +16,9 @@ const config = {
     apiKey:        process.env.FINNHUB_API_KEY,
     sandboxApiKey: process.env.FINNHUB_SANDBOX_API_KEY,
     webhookSecret: process.env.FINNHUB_WEBHOOK_SECRET,
+  },
+  polygon: {
+    apiKey: process.env.POLYGON_API_KEY,
   }
 }
 

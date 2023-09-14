@@ -2,7 +2,7 @@ import Debug from 'debug'
 import express from 'express'
 import getCandle from './getCandle'
 
-const debug = Debug('stocks:api')
+const debug = Debug('stocks:api:router')
 
 var router = express.Router()
 
