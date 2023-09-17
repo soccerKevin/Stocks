@@ -1,4 +1,4 @@
-name: Test_Build
+name: Build
 run-name: Building ${{ github.sha }} on ${{ github.base_ref }}
 on: [ push ]
 jobs: 
