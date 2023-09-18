@@ -17,4 +17,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.15.0'
-      - run: docker compose up
+
+      - name: Build Image
+      - run: docker build -t Stocks:${{ github.base_ref }} .
+
+      - name: Deploy
+        uses: deploy.yml
+        secrets: 
+          IMAGE_NAME: Stocks:${{ github.base_ref }}
+
+
+      
