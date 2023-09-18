@@ -8,7 +8,8 @@ jobs:
       AWS_KEY: ${{ secrets.AWS_KEY }}
       DEPLOYER_PEM: ${{ secrets.DEPLOYER_PEM }}
     permissions:
-      contents: write
+      contents: read
+      id-token: write
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout
@@ -19,7 +20,8 @@ jobs:
       - name: Configure AWS deployer credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::267135861046:role/DeployerRole
+          role-to-assume: arn:aws:iam::267135861046:role/GithubActionsDeployer
+          aws-region: us-west-1
 
       - name: Launch instance
         run: aws ec2 run-instances --image-id ami-073e64e4c237c08ad --count 1 --instance-type t2.micro --security-group-ids sg-05d4593547be6e90d
