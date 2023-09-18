@@ -1,0 +1,38 @@
+name: Build
+run-name: Building ${{ github.sha }} on ${{ github.ref_name }}
+on: [ push ]
+env: 
+  BRANCH: ${{ github.ref_name }}
+jobs: 
+  DockerImage:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: soccerKevin/Stocks
+          ref: ${{ github.ref_name }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.15.0'
+
+      - name: echo
+        env:
+          TAG: tagger
+        run: echo $TAG
+
+      - name: echo2
+        run: echo $BRANCH
+
+      - name: Build Image
+        run: docker build -t stocks:$BRANCH .
+
+      # - name: Deploy
+      #   uses: deploy.yml
+      #   secrets: 
+      #     IMAGE_NAME: Stocks:${{ github.ref_name }}
