@@ -7,7 +7,10 @@ jobs:
   DockerImage:
     permissions:
       contents: write
+      id-token: write
     runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: stocks-1:${{ github.ref_name }}
     steps: 
       - name: Checkout
         uses: actions/checkout@v3
@@ -21,10 +24,33 @@ jobs:
         with:
           node-version: '16.15.0'
 
-      # - name: Build Image
-      #   run: docker build -t stocks:$BRANCH .
+      - name: Build Image
+        run: docker build -t $IMAGE_NAME .
 
-      - name: Deploy
-        uses: ./.github/actions/deploy
-        with: 
-          IMAGE_NAME: stocks:$BRANCH
+      - name: Configure AWS deployer credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::267135861046:role/GithubActionsDeployer
+          aws-region: us-west-1
+
+      - name: aws config
+        run: aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 267135861046.dkr.ecr.us-west-1.amazonaws.com
+
+      - name: Tag Image
+        run: docker tag $IMAGE_NAME 267135861046.dkr.ecr.us-west-1.amazonaws.com/$IMAGE_NAME
+
+      - name: Push Image
+        run: docker push 267135861046.dkr.ecr.us-west-1.amazonaws.com/$IMAGE_NAME
+
+#       - name: Launch instance
+#         run: aws ec2 run-instances --image-id ami-073e64e4c237c08ad --count 1 --instance-type t2.micro --security-group-ids sg-05d4593547be6e90d
+
+      # - name: SSH into server
+      #   run: ssh -i "stocksServer.pem" ec2-user@ec2-13-57-214-123.us-west-1.compute.amazonaws.com
+
+      # - name: Install AWS_CLI
+      #   run: sudo yum update -y
+      #   run: sudo yum install docker -y
+      #   run: sudo service docker start
+      #   run: sudo usermod -a -G docker ec2-user
+
