@@ -1,5 +1,4 @@
 name: Deploy
-run-name: Deploying ${{ github.sha }}
 on: 
   workflow_call:
     inputs:
@@ -7,10 +6,11 @@ on:
         required: true
         type: string
 env: 
-  AWS_USER: ${{ secrets.AWS_USER }}
-  AWS_KEY: ${{ secrets.AWS_KEY }}
-  DEPLOYER_PEM: ${{ secrets.DEPLOYER_PEM }}
+  # AWS_USER: ${{ secrets.AWS_USER }}
+  # AWS_KEY: ${{ secrets.AWS_KEY }}
+  # DEPLOYER_PEM: ${{ secrets.DEPLOYER_PEM }}
   IMAGE_NAME: ${{ inputs.IMAGE_NAME }}
+run-name: Deploying $IMAGE_NAME
 jobs: 
   Deploy:
     permissions:

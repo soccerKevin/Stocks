@@ -21,18 +21,10 @@ jobs:
         with:
           node-version: '16.15.0'
 
-      - name: echo
-        env:
-          TAG: tagger
-        run: echo $TAG
+      # - name: Build Image
+      #   run: docker build -t stocks:$BRANCH .
 
-      - name: echo2
-        run: echo $BRANCH
-
-      - name: Build Image
-        run: docker build -t stocks:$BRANCH .
-
-      # - name: Deploy
-      #   uses: deploy.yml
-      #   secrets: 
-      #     IMAGE_NAME: Stocks:${{ github.ref_name }}
+      - name: Deploy
+        uses: ./.github/actions/deploy
+        with: 
+          IMAGE_NAME: stocks:$BRANCH
