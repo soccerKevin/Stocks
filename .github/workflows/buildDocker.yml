@@ -1,5 +1,5 @@
 name: Build
-run-name: Building ${{ github.sha }} on ${{ github.ref_name }}
+run-name: Building ${{ github.ref_name }} commit ${{ github.sha }} 
 on: [ push ]
 env: 
   BRANCH: ${{ github.ref_name }}
@@ -42,15 +42,44 @@ jobs:
       - name: Push Image
         run: docker push 267135861046.dkr.ecr.us-west-1.amazonaws.com/$IMAGE_NAME
 
-#       - name: Launch instance
-#         run: aws ec2 run-instances --image-id ami-073e64e4c237c08ad --count 1 --instance-type t2.micro --security-group-ids sg-05d4593547be6e90d
+      - name: Launch test instance
+        run: aws ec2 run-instances --image-id ${{ vars.SERVER_AMI_ID }} --count 1 --instance-type ${{ vars.SERVER_INSTANCE_TYPE }} --security-group-ids ${{ secrets.SERVER_SG }} --key-name ${{ secrets.SERVER_PEM_NAME}}
 
-      # - name: SSH into server
-      #   run: ssh -i "stocksServer.pem" ec2-user@ec2-13-57-214-123.us-west-1.compute.amazonaws.com
+      - name: Launch instance
+        run: echo "INSTANCE_ID=$(aws ec2 run-instances --image-id ${{ vars.SERVER_AMI_ID }} --count 1 --instance-type ${{ vars.SERVER_INSTANCE_TYPE }} --security-group-ids ${{ secrets.SERVER_SG }} --key-name ${{ secrets.SERVER_PEM_NAME}} | jq -r '.Instances[0].InstanceId')" >> $GITHUB_ENV
+
+      # - name: Parse instance ID
+      #   run: echo "INSTANCE_ID=$(echo $LAUNCH_RESPONSE | jq -r '.Instances[0].InstanceId')" >> $GITHUB_ENV
+
+      # - name: print1
+      #   run: echo $LAUNCH_RESPONSE
+
+      - name: print2
+        run: echo $INSTANCE_ID
+
+      - name: Wait for instance to be running
+        run: aws ec2 wait instance-running --instance-ids $INSTANCE_ID
+      
+      - name: Get instance PublicDnsName
+        run: echo "PUBLIC_DNS_NAME=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID | jq -r '.Reservations[0].Instances[0].PublicDnsName')" >> $GITHUB_ENV
+
+      - name: print3
+        run: echo $PUBLIC_DNS_NAME
+
+      # - name: Wait for SSH to be available
+      #   run: |
+      #     while ! ssh -o StrictHostKeyChecking=no -i ${{ secrets.SERVER_PEM }} ec2-user@$PUBLIC_DNS_NAME exit; do
+      #       echo "Waiting for SSH..."
+      #       sleep 10
+      #     done
+
+      # - name: ssh into server
+      #   run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SERVER_PEM }} ec2-user@$PUBLIC_DNS_NAME "docker pull 267135861046.dkr.ecr.us-west-1.amazonaws.com/$IMAGE_NAME"
 
       # - name: Install AWS_CLI
-      #   run: sudo yum update -y
-      #   run: sudo yum install docker -y
-      #   run: sudo service docker start
-      #   run: sudo usermod -a -G docker ec2-user
+      #   run: |
+      #     sudo yum update -y
+      #     sudo yum install docker -y
+      #     sudo service docker start
+      #     sudo usermod -a -G docker ec2-user
 
